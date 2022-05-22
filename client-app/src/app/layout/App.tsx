@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
@@ -16,42 +14,31 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { List } from '@mui/material';
-
+import { ListItem } from '@mui/material';
+import { Activity } from '../models/activity';
+import NavBar from './NavBar';
+import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 
 function App() {
-  const [activities,setActivities] = useState([]);
+  const [activities,setActivities] = useState<Activity[]>([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/activities').then(response => {
-      console.log(response);
+    axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
       setActivities(response.data);
     })
   }, [])
+  
     
 
 
   return (
     <div>
-        <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar variant="dense">
-          <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit" component="div">
-            Anodyne
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </Box>
-    
-        <List>
-          {activities.map((activity: any) => (
-            <li key={activity.id}>
-            {activity.title}
-            </li>
-          ))}
-        </List>
+      <>
+      <NavBar />
+      <Container style={{marginTop: '7em'}}>
+        <ActivityDashboard activities={activities}/>
+      </Container>
+      </>
             
     </div>
   
