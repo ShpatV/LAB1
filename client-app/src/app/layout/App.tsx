@@ -1,32 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { List } from '@mui/material';
-import { ListItem } from '@mui/material';
 import { Activity } from '../models/activity';
 import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
+import {v4 as uuid} from 'uuid';
 
 function App() {
   const [activities,setActivities] = useState<Activity[]>([]);
 
+  const[selectedActivity,setSelectedActivity]= useState<Activity | undefined>(undefined);
+  const [editMode,setEditMode] = useState(false);
+
   useEffect(() => {
+
     axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
       setActivities(response.data);
     })
   }, [])
+
+  function handleSelectActivity(id: string){
+    setSelectedActivity(activities.find(x=> x.id=== id))//x esht variabla qe e handla activity,prezanton activity
+
+  }
+
+  function handleCancelSelectActivity(){
+    setSelectedActivity(undefined);
+  }
+
+  function handleFormOpen(id?: string){
+    id ? handleSelectActivity(id) : handleCancelSelectActivity();
+    setEditMode(true);
+  }
+
+  function handleFormClose(){
+    setEditMode(false);
+  }
+
+  function handleCreateOrEditActivity(activity: Activity){
+    activity.id ? setActivities([...activities.filter(x=> x.id !== activity.id),activity])
+    : setActivities([...activities,{...activity,id:uuid()}]);
+    setEditMode(false);
+    setSelectedActivity(activity);
+  }
   
     
 
@@ -34,9 +50,18 @@ function App() {
   return (
     <div>
       <>
-      <NavBar />
+      <NavBar openForm={handleFormOpen}/>
       <Container style={{marginTop: '7em'}}>
-        <ActivityDashboard activities={activities}/>
+        <ActivityDashboard
+         activities={activities}
+         selectedActivity={selectedActivity}
+         selectActivity={handleSelectActivity}
+         cancelSelectActivity={handleCancelSelectActivity}
+         editMode={editMode}
+         openForm={handleFormOpen}
+         closeForm={handleFormClose}
+         createOrEdit={handleCreateOrEditActivity}
+         />
       </Container>
       </>
             

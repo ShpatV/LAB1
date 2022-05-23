@@ -1,5 +1,4 @@
 import React from 'react';
-import { Menu } from '@mui/material';
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -7,19 +6,14 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { List } from '@mui/material';
-import { ListItem } from '@mui/material';
-import { Activity } from '../models/activity';
-import axios from 'axios';
 
 
+interface Props{
+  openForm:()=> void;
+}
 
-export default function NavBar(){
+
+export default function NavBar({openForm}: Props){
     return (
         
         <Box sx={{ flexGrow: 1 }}>
@@ -37,7 +31,7 @@ export default function NavBar(){
             <Typography variant="h6" color="inherit" component="div" sx={{ mr: 10 }}>
               Activities
             </Typography>
-            <Button variant="contained" color="success" >Create Activity</Button>
+            <Button onClick={openForm} variant="contained" color="success" >Create Activity</Button>
           </Toolbar>
         </AppBar>
         
