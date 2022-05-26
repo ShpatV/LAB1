@@ -1,5 +1,5 @@
-import { Label, LabelImportant, Segment } from '@mui/icons-material';
-import React from 'react';
+import { Label, LabelImportant, LabelImportantOutlined, Segment } from '@mui/icons-material';
+import React, { SyntheticEvent, useState } from 'react';
 import {Activity} from '../../../app/models/activity';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -13,20 +13,30 @@ import IconButton from '@mui/material/IconButton';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { LinearProgressProps } from '@mui/material';
 
 interface Props{
     activities: Activity[];
     selectActivity: (id: string) => void;
+    deleteActivity: (id:string)=>void;
+    submitting:boolean;
 }
 
-export default function ActivityList({activities,selectActivity}:Props) {
+export default function ActivityList({activities,selectActivity,deleteActivity,submitting}:Props) {
+    const [target,setTarget] = useState('');
+
+    function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id:string){
+        setTarget(e.currentTarget.name);
+        deleteActivity(id);
+    }
     const theme = useTheme();
     return(
         
              <Card sx={{ display: 'flex-column' }}>
                  {activities.map(activity=> (
-                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                    <Card key={activity.id}>
+                  
+                 <Box key={activity.id} sx={{ display: 'flex', flexDirection: 'column' }}>
+                    <Card>
                         <CardContent sx={{ flex: '1 0 auto' }}>
                             <Typography gutterBottom variant="h5" component="div">
                             {activity.title}
@@ -35,15 +45,20 @@ export default function ActivityList({activities,selectActivity}:Props) {
                             {activity.date}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
-                                <div>{activity.description}</div>
-                                <div>{activity.city},{activity.venue}</div>
+                                {activity.description}
+                                </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                                {activity.city},{activity.venue}
                             </Typography>
-                        </CardContent>
+                       
                         <CardActions>
-                            <Button onClick={() => selectActivity(activity.id)} size="small">View</Button>
-                            <Button size="small">{activity.category}</Button>
+                            <Button  onClick={() => selectActivity(activity.id)} size="small">View</Button>
+                            <Button name={activity.id} onClick={(e) => handleActivityDelete(e,activity.id)} size="small">Delete</Button>
+                            
+                            <Typography>{activity.category}</Typography>
                             
                         </CardActions>
+                        </CardContent>
                     </Card>
                   </Box>
                 

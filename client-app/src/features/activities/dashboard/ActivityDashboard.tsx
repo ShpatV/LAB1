@@ -17,6 +17,8 @@ interface Props{
     openForm: (id: string)=>void;//kjo duhet te jet e selektuar
     closeForm: () => void;
     createOrEdit: (activity:Activity)=>void;
+    deleteActivity: (id:string)=>void;
+    submitting: boolean;
 }
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -25,30 +27,36 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'left',
     color: theme.palette.text.secondary,
   }));
-export default function ActivityDashboard({activities,selectedActivity,
-         selectActivity,cancelSelectActivity,editMode,openForm,closeForm,createOrEdit} : Props){//child i app component
+export default function ActivityDashboard({activities,selectedActivity,deleteActivity,
+         selectActivity,cancelSelectActivity,editMode,openForm,closeForm,createOrEdit,submitting} : Props){//child i app component
     return (
      
             <Grid container spacing={{xs:10,md:15}} >
-                
-           
                 <Grid item xs={1} sm={4} md={6} >
-                    <Item><ActivityList activities={activities} selectActivity={selectActivity}/></Item>
+                    <Item><ActivityList activities={activities}
+                    selectActivity={selectActivity}
+                    deleteActivity={deleteActivity}
+                    submitting={submitting}
+                    
+                    />
+                    
+                    </Item>
                 </Grid>
                 <Grid item xs={1} sm={4} md={6} >
                     {selectedActivity && !editMode &&
-                   <ActivityDetails activity={selectedActivity}
+                   <ActivityDetails 
+                    activity={selectedActivity}
                     cancelSelectActivity={cancelSelectActivity} 
                     openForm={openForm}
                     />}
                     {editMode &&
-                   <ActivityForm closeForm={closeForm} activity={selectedActivity} createOrEdit={createOrEdit} />}
+                   <ActivityForm 
+                        closeForm={closeForm}
+                        activity={selectedActivity} 
+                        createOrEdit={createOrEdit}
+                        submitting={submitting}
+                        />}
                 </Grid>
-              
-                
-                                
-                
-             
             </Grid>
  
 

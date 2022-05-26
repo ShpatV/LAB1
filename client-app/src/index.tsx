@@ -4,6 +4,7 @@ import './app/layout/styles.css';
 import App from './app/layout/App';
 import '@mui/material';
 import reportWebVitals from './reportWebVitals';
+// import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -8,15 +8,17 @@ import Typography from '@mui/material/Typography';
 import { Activity } from '../../../app/models/activity';
 
 interface Props{
-    activity: Activity
+    activity: Activity;
     cancelSelectActivity: () => void;
     openForm: (id: string)=> void;
 }
 
 export default function ActivityDetails({activity,cancelSelectActivity,openForm}: Props){
     return(
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia component="img" height="140" image={`/assets/categoryImages/${activity.category}.jpg`}/>
+        <Card sx={{ maxWidth: 345  }}>
+
+        
+            <CardMedia component="img" height="140" image={`/assets/categoryImages/${activity.category}.jpg`} />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                     {activity.title}
@@ -32,6 +34,8 @@ export default function ActivityDetails({activity,cancelSelectActivity,openForm}
                     <Button onClick={()=> openForm(activity.id)} size="small">Edit</Button>
                     <Button onClick={cancelSelectActivity} size="small" color="error">Cancel</Button>
                 </CardActions>
+               
+                
          </Card>
 
     );

@@ -5,14 +5,16 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { Activity } from '../../../app/models/activity';
 
+
 interface Props{
   activity: Activity | undefined;
   closeForm: () => void;
   createOrEdit: (activity: Activity) => void;
+  submitting: boolean;
 }
 
 
-export default function ActivityForm({activity: selectedActivity, closeForm,createOrEdit}: Props){
+export default function ActivityForm({activity: selectedActivity, closeForm,createOrEdit,submitting}: Props){
 
   const initialState = selectedActivity ?? { //nese esht null skthen,selected activity qe merret nga props
     id:'',
@@ -29,86 +31,25 @@ export default function ActivityForm({activity: selectedActivity, closeForm,crea
     createOrEdit(activity);
   }
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>){
     const {name,value} = event.target;
-    setActivity({...activity,[name]:value})//name vendoset ku o value
+    setActivity({...activity, [name]: value})//name vendoset ku o value
 
   }
     return(
-     
-        <Box onSubmit={handleSubmit}  component="form"sx={{'& .MuiTextField-root': { m: 2, width: '36ch' },}}
-        noValidate
-        autoComplete="off">
-        <div>
-          <TextField 
-            required
-            id="outlined-required"
-            label="title"
-            name="title"
-            value={activity.title}
-            onChange={handleInputChange}
-          />
-          </div>
-          <div>
-          <TextField 
-            required
-            id="outlined-required"
-            label="description"
-            name="description"
-            defaultValue=""
-            value={activity.description}
-            onChange={handleInputChange}
-          />
-          </div>
-          <div>
-          <TextField 
-            required
-            id="outlined-required"
-            label="category"
-            name="dategory"
-            defaultValue=""
-            value={activity.category}
+      // <form onSubmit={handleSubmit} autoComplete='off'>
+      
+         <Box component="form" sx={{'& .MuiTextField-root': { m: 2, width: '36ch' },}}  onSubmit={handleSubmit} autoComplete="off"> 
+                <TextField name='title' value={activity.title}  onChange={handleInputChange}/>
+                <TextField  name='description' value={activity.description}  onChange={handleInputChange}/>
+                <TextField  name='category' value={activity.category} onChange={handleInputChange}/>
+                <TextField type='date' name='date' value={activity.date} onChange={handleInputChange}/>
+                <TextField  name='city' value={activity.city}  onChange={handleInputChange}/>
+                <TextField  name='venue' value={activity.venue}  onChange={handleInputChange}/>
+                <Button  type='submit' variant="contained" color="inherit">Submit</Button>
+                <Button type='button' onClick={closeForm} >Cancel</Button>
+          </Box> 
          
-          />
-          </div>
-          <div>
-          <TextField 
-            required
-            id="outlined-required"
-            label="date"
-            name="date"
-            defaultValue=""
-            value={activity.date}
-            onChange={handleInputChange}
-          />
-          </div>
-          <div>
-          <TextField 
-            required
-            id="outlined-required"
-            label="city"
-            name="city"
-            defaultValue=""
-            value={activity.city}
-            onChange={handleInputChange}
-          />
-          </div>
-          <div>
-          <TextField 
-            required
-            id="outlined-required"
-            label="venue"
-            name="venue"
-            defaultValue=""
-            value={activity.venue}
-            onChange={handleInputChange}
-          />
-          </div>
-          <Button  size="small" color="success">Submit</Button>
-          <Button onClick={closeForm} size="small" color="error">Cancel</Button>
-          
-          
-          </Box>
       
     )
 }
