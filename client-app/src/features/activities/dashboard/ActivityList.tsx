@@ -1,4 +1,3 @@
-import { Label, LabelImportant, LabelImportantOutlined, Segment } from '@mui/icons-material';
 import React, { SyntheticEvent, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,6 +8,7 @@ import Box from '@mui/material/Box';
 import CardContent from '@mui/material/CardContent';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
+import { Link } from 'react-router-dom';
 
 
 export default observer (function ActivityList() {
@@ -44,7 +44,7 @@ export default observer (function ActivityList() {
                             </Typography>
                        
                         <CardActions>
-                            <Button  onClick={() => activityStore.selectActivity(activity.id)} size="small">View</Button>
+                            <Button component={Link} to={`/activities/${activity.id}`} size="small">View</Button>
                             <Button name={activity.id} onClick={(e) => handleActivityDelete(e,activity.id)} size="small">Delete</Button>
                             
                             <Typography>{activity.category}</Typography>

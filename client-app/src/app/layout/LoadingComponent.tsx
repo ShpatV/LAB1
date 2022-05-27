@@ -1,6 +1,6 @@
 import React from 'react';
-import {Backdrop, LinearProgress} from '@mui/material';
-import {CircularProgress} from '@mui/material';
+import {LinearProgress} from '@mui/material';
+
 interface Props{
     inverted?: boolean;
     content: string;
