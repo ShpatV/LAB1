@@ -4,10 +4,12 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
-import { useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import {v4 as uuid} from 'uuid';
 
 export default observer( function ActivityForm(){
+  const history = useHistory();
   const {activityStore}= useStore();
   const {createActivity,updateActivity,loading,loadActivity,loadingInitial}=activityStore;
   const {id} = useParams<{id: string}>();
@@ -29,7 +31,15 @@ export default observer( function ActivityForm(){
 
 
   function handleSubmit(){
-    activity.id ? updateActivity(activity) : createActivity(activity);
+    if(activity.id.length === 0){
+      let newActivity = {
+        ...activity,
+        id: uuid()
+      };
+      createActivity(newActivity).then(()=> history.push(`/activities/${newActivity.id}`))
+    } else {
+      updateActivity(activity).then(()=> history.push(`/activities/${activity.id}`))
+    }
   }
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>){
@@ -52,7 +62,7 @@ export default observer( function ActivityForm(){
                 <TextField  required name='venue' value={activity.venue} label='venue'  onChange={handleInputChange}/>
                 <div>
                 <Button   type='submit' variant="contained" color="success">Submit</Button>
-                <Button type='button'>Cancel</Button>
+                <Button component={Link} to='/activities' type='button'>Cancel</Button>
                 </div>
           </Box> 
          

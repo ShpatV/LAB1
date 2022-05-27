@@ -39,7 +39,7 @@ export default observer(function ActivityDetails(){
                    {activity.description}
                     </Typography>
                 </CardContent>
-                <CardActions>
+                <CardActions>       
                     <Button component={Link} to={`/manage/${activity.id}`} size="small">Edit</Button>
                     <Button component={Link} to='/activities' size="small" color="error">Cancel</Button>
                 </CardActions>
