@@ -6,14 +6,15 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useStore } from '../stores/store';
 
 
-interface Props{
-  openForm:()=> void;
-}
 
 
-export default function NavBar({openForm}: Props){
+
+export default function NavBar(){
+
+  const {activityStore} = useStore();
     return (
         
         <Box sx={{ flexGrow: 1 }}>
@@ -31,7 +32,7 @@ export default function NavBar({openForm}: Props){
             <Typography variant="h6" color="inherit" component="div" sx={{ mr: 10 }}>
               Activities
             </Typography>
-            <Button onClick={openForm} variant="contained" color="success" >Create Activity</Button>
+            <Button onClick={()=>activityStore.openForm()} variant="contained" color="success" >Create Activity</Button>
           </Toolbar>
         </AppBar>
         
