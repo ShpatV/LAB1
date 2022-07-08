@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import { useStore } from '../../../app/stores/store';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
-import { Link } from 'react-router-dom';
+import ActivityDetailedHeader from './ActivityDetailedHeader';
+import ActivityDetailedInfo from './ActivityDetailedInfo';
+import ActivityDetailedChat from './ActivityDetailedChat';
+import ActivityDetailedSidebar from './ActivityDetailedSidebar';
+import Grid from '@mui/material/Grid';
 
 
 export default observer(function ActivityDetails(){
@@ -24,28 +22,32 @@ export default observer(function ActivityDetails(){
     if (loadingInitial || !activity) return <LoadingComponent />;
 
     return(
-        <Card sx={{ maxWidth: 345  }}>
+    //     <Grid>
+    //     <Grid container spacing={2} columns={16}>
+    //         <Grid >
+    //         <ActivityDetailedHeader />
+    //         <ActivityDetailedInfo />
+    //         <ActivityDetailedChat />
+    //         </Grid>
+          
 
+    //     </Grid>
+    //     <Grid >
+    //     <Grid container spacing={2} columns={16}>
+    //         <ActivityDetailedSidebar /></Grid>
+    //     </Grid>
+    // </Grid>
+    <Grid container>
+        <Grid item xs={12} sm={6} md={9}>
+        <ActivityDetailedHeader activity={activity} />
+        <ActivityDetailedInfo activity={activity}/>
+        <ActivityDetailedChat />
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
+        <ActivityDetailedSidebar />
+        </Grid>
         
-            <CardMedia component="img" height="140" image={`/assets/categoryImages/${activity.category}.jpg`} />
-                <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                    {activity.title}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                   {activity.date}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                   {activity.description}
-                    </Typography>
-                </CardContent>
-                <CardActions>       
-                    <Button component={Link} to={`/manage/${activity.id}`} size="small">Edit</Button>
-                    <Button component={Link} to='/activities' size="small" color="error">Cancel</Button>
-                </CardActions>
-               
-                
-         </Card>
+    </Grid>
 
     );
 })

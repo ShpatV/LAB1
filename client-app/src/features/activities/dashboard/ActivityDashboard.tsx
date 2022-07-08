@@ -7,14 +7,9 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
+import ActivityFilters from './ActivityFilters';
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(2),
-    textAlign: 'left',
-    color: theme.palette.text.secondary,
-  }));
+
   
 
 export default observer(function ActivityDashboard(){//child i app component
@@ -29,14 +24,14 @@ export default observer(function ActivityDashboard(){//child i app component
 
     return (
      
-            <Grid container spacing={{xs:10,md:15}} >
-                <Grid item xs={1} sm={4} md={6} >
-                    <Item><ActivityList />
+            <Grid container spacing={{xs:4,md:2}}  >
+                <Grid item xs={5} sm={12} md={6} >
+                    <Grid item><ActivityList />
                     
-                    </Item>
+                    </Grid>
                 </Grid>
                 <Grid item xs={1} sm={4} md={6} >
-                  <h2>Activity filters</h2>
+                  <ActivityFilters />
                 </Grid>
             </Grid>  
     )
