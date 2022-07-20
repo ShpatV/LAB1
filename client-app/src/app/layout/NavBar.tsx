@@ -25,6 +25,7 @@ export default function NavBar(){
             <Tabs textColor="inherit" sx={{ mr: 5 }}>
               <Tab label="Reactivities" component={NavLink} to='/' style={{textDecoration:"none"}} />
               <Tab label="Activities" component={NavLink} to='/activities' style={{textDecoration:"none"}} />
+              <Tab label="Errors" component={NavLink} to='/errors' style={{textDecoration:"none"}} />
             </Tabs>  
             <Button sx={{ mr: 5 }} component={NavLink} to='/createActivity' style={{textDecoration:"none"}}  variant="contained" color="success" >Create Activity</Button>
           </Toolbar>

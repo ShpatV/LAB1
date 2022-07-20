@@ -2,6 +2,7 @@ import { Box, Button, Card, CardActionArea, CardActions, CardContent, CardMedia,
 import { Container } from '@mui/system';
 import React from 'react';
 import {Link} from "react-router-dom"
+
 import { BannerContainer, BannerContent, BannerImage, Footer } from '../styles';
 
 export default function Banner(){

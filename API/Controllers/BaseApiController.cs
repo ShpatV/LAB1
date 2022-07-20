@@ -1,10 +1,10 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-
-namespace API.Controllers
+using Application.Core;
+namespace API.Controllers//kqyr ne menyre automatike
 {
-    [ApiController]
+    [ApiController]//kqyr ne menyre automatike gjeneron http responses nga validimi
     [Route("api/[controller]")]  //api/activities shfaq endpoints
     public class BaseApiController : ControllerBase
     {
@@ -12,5 +12,16 @@ namespace API.Controllers
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices//ben mediator available to qfar do klase te APIcontroller
             .GetService<IMediator>();
+
+        protected ActionResult HandleResult<T>(Result<T> result)    
+        {
+            if(result == null) return NotFound();
+            if(result.IsSuccess && result.Value !=null)
+                return Ok(result.Value);
+            if(result.IsSuccess && result.Value == null)
+                return NotFound();
+            return BadRequest(result.Error);   
+
+        }
     }
 }
