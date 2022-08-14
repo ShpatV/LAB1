@@ -1,4 +1,5 @@
 import { Avatar, Button, Card, CardHeader, Typography, createTheme } from '@mui/material';
+import {format} from 'date-fns';
 import { Box } from '@mui/system';
 import React  from 'react';
 import { Link } from 'react-router-dom';
@@ -80,7 +81,7 @@ export default function ActivityListItem({activity}:Props){
          
             <Card sx={{width:624, height:50,backgroundColor:'#fafafa'}} >
                 <Box sx={{marginTop:1.3,marginLeft:2.5}}>
-                    <AccessTimeIcon />  <Typography fontSize={15} fontFamily={'Century Gothic'} >{activity.date}</Typography>
+                    <AccessTimeIcon />  <Typography fontSize={15} fontFamily={'Century Gothic'} >{format(activity.date!, 'dd MMM yyyy h:mm aa')}</Typography>
 
                     <Typography fontSize={15} fontFamily={'Century Gothic'} style={{float:'right',marginRight:50}}  >
                     <PushPinIcon />{activity.venue}</Typography></Box>

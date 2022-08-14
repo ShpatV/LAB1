@@ -5,6 +5,7 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import {Activity} from "../../../app/models/activity";
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
+import {format} from 'date-fns';
 
 interface Props {
     activity: Activity
@@ -49,7 +50,7 @@ export default observer(function ActivityDetailedInfo({activity}: Props) {
               <CalendarMonthOutlinedIcon />
             </Grid>
             <Grid item xs>
-              <Typography noWrap> {activity.date}</Typography>
+              <Typography noWrap> {format(activity.date!, 'dd MMM yyyy h:mm aa' )}</Typography>
             </Grid>
           </Grid>
         </StyledPaper>

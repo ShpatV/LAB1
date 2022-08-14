@@ -5,6 +5,8 @@ import {Activity} from "../../../app/models/activity";
 import {CssBaseline} from '@mui/material';
 import {ThemeProvider} from '@mui/system';
 import { green, lightGreen, pink, purple, red } from '@mui/material/colors';
+import { Link } from 'react-router-dom';
+import {format} from 'date-fns';
 const activityImageStyle ={
    
 
@@ -57,14 +59,14 @@ export default observer (function ActivityDetailedHeader({activity}: Props) {
         <Box>
             <Paper style={styles.paperContainer} sx={{filter: 'brightness(100%)' ,maxWidth:945,height:400}}>
                 <Typography sx={{textAlign:'left',position:'absolute',marginTop:20,marginLeft:5,fontFamily:'Century Gothic',fontSize:60,color:'white'}}>{activity.title}
-                <Typography>{activity.date}</Typography>
+                <Typography>{format (activity.date!,'dd MMM yyyy')}</Typography>
                 <Typography>Hosted by shpati</Typography>
                 </Typography>
             </Paper>
             <Paper sx={{height:70}}>
                 <Button variant="outlined"  sx={{marginTop:2,marginLeft:4.5}}>Join Activity</Button>
                 <Button variant="outlined" color="error" sx={{marginTop:2,marginLeft:1.5}}>Cancel attendance</Button>
-                 <Button variant="contained" sx={{float:'right',marginTop:2,marginRight:4.5}}>
+                 <Button component={Link} to={`/manage/${activity.id}`}  variant="contained" sx={{float:'right',marginTop:2,marginRight:4.5}}>
                     Manage Event
                 </Button>
                

@@ -3,24 +3,43 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@chakra-ui/react": "^2.2.4",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mantine/core": "^4.2.12",
+    "@mantine/dates": "^4.2.12",
+    "@mantine/dropzone": "^4.2.12",
+    "@mantine/form": "^4.2.12",
+    "@mantine/hooks": "^4.2.12",
+    "@mantine/modals": "^4.2.12",
+    "@mantine/next": "^4.2.12",
+    "@mantine/notifications": "^4.2.12",
+    "@mantine/prism": "^4.2.12",
+    "@mantine/rte": "^4.2.12",
+    "@mantine/spotlight": "^4.2.12",
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.0",
     "@mui/styled-engine-sc": "^5.8.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
+    "@types/gestalt": "^55.2.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.27",
     "@types/react": "^18.0.6",
     "@types/react-calendar": "^3.5.1",
     "@types/react-dom": "^18.0.2",
     "axios": "^0.26.1",
+    "date-fns": "^2.29.1",
+    "dayjs": "^1.11.4",
+    "formik": "^2.2.9",
+    "framer-motion": "^6.5.1",
+    "gestalt": "^62.0.11",
     "mobx": "^6.6.0",
     "mobx-react-lite": "^3.4.0",
     "react": "^18.0.0",
     "react-calendar": "^3.7.0",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "5.0.1",
@@ -28,7 +47,8 @@
     "styled-components": "^5.3.5",
     "typescript": "^4.6.3",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -55,7 +75,9 @@
     ]
   },
   "devDependencies": {
+    "@types/react-datepicker": "^4.4.2",
     "@types/react-router-dom": "^5.3.3",
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^8.3.4",
+    "@types/yup": "^0.29.14"
   }
 }
