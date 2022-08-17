@@ -5,6 +5,7 @@ using Domain;
 using System;
 using Application.Activities;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 
@@ -20,6 +21,8 @@ namespace API.Controllers
             return HandleResult (await Mediator.Send(new List.Query()));//kthen response back te mediatr handler dhe mirret prej baseApicontroller
         }
 
+
+       
         [HttpGet("{id}")]//per activity tveqanta endpoint
         public async Task<IActionResult> GetActivity(Guid id)
         {

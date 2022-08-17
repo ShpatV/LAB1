@@ -20,7 +20,6 @@ import { Activity } from '../../../app/models/activity';
 
 
 export default observer( function ActivityForm(){
-  const [selected,setSelected] = useState("");
   const history = useHistory();
   const {activityStore}= useStore();
   const {createActivity,updateActivity,loading,loadActivity,loadingInitial}=activityStore;
