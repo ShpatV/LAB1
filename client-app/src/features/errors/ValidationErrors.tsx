@@ -1,4 +1,4 @@
-import { AlertProps, AlertTitle, Typography } from '@mui/material';
+import { AlertProps, AlertTitle, Box, Typography } from '@mui/material';
 import React from 'react';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -24,9 +24,11 @@ export default function ValidationErrors({errors}: Props ){
         
           {errors && (
             <Alert severity="warning" sx={{marginTop:2}}>
+        
               {errors.map((err:any,i: any) => (
                 <Typography sx={{fontFamily:'Century Gothic',fontSize:15,padding:0.5}}  key={i}>{err}</Typography>
               ))}
+           
 
             </Alert>
            )}

@@ -24,8 +24,8 @@ export default observer( function RegisterForm(){
             })}    
         >
             {({handleSubmit, isSubmitting, errors, isValid, dirty}) => (
-                <Box component="form" onSubmit={handleSubmit} autoComplete='off'>
-                    <Typography variant='h2' sx={{textAlign:'center',color:'teal'}}>Sign up to Reactivities</Typography>
+                <Box component="form"  onSubmit={handleSubmit} autoComplete='off'>
+                    <Typography  sx={{textAlign:'center',color:'teal'}}>Sign up to Reactivities</Typography>
                     <MyTextInput name='displayName' placeholder='Display Name' />
                     <MyTextInput name='username' placeholder='Username' />
                     <MyTextInput name='email' placeholder='Email' />
@@ -37,7 +37,7 @@ export default observer( function RegisterForm(){
                         // <Alert severity='error'>{errors.error}</Alert>}
                     
                     />
-                    <Button disabled={!isValid || !dirty || isSubmitting } type='submit'>Login</Button>
+                    <Button disabled={!isValid || !dirty || isSubmitting } type='submit'>Register</Button>
                     
 
                 </Box>
