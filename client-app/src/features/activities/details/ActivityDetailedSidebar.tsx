@@ -2,10 +2,20 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
-import { Box, Typography,List, Divider, Avatar, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
+import { Box, Typography,List, Divider, Avatar, ListItem, ListItemAvatar, ListItemText, Stack } from '@mui/material';
+import { Activity } from '../../../app/models/activity';
 
-export default observer(function ActivityDetailedSidebar () {
+interface Props {
+    activity: Activity;
+}
+
+
+
+export default observer(function ActivityDetailedSidebar ({activity: {attendees, host}}: Props) {
+    if (!attendees) return null;
+  
     return (
+        
         <><Box sx={{
             marginLeft:2,
             width: 463,
@@ -13,52 +23,41 @@ export default observer(function ActivityDetailedSidebar () {
             height: 60,
             backgroundColor: 'primary.dark',
             marginTop:2
-        }}><Typography variant="h1" align="center" sx={{fontFamily:'Century Gothic',fontSize:20,padding:2,color:'white'}}>3 People Going</Typography></Box>
-        <Box sx={{width: 463,
-         marginLeft:2,
-            borderRadius:2,
-            height: 230,
-            backgroundColor: 'white'}}>
-        <List sx={{ width: '100%', maxWidth: 463, bgcolor: 'background.paper' }}>
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" variant="square"  sx={{ width: 56, height: 56 }}/>
-                    </ListItemAvatar>
-                    <ListItemText sx={{marginLeft:2}}
-                        primary="MOTY"
-                        secondary={<React.Fragment>
+        }}><Typography variant="h1" align="center" sx={{fontFamily:'Century Gothic',fontSize:20,padding:2,color:'white'}}>
+            {attendees.length} {attendees.length===1 ? 'Person' : 'People'} going
+            </Typography></Box>
+            <Box sx={{width: 463,
+            marginLeft:2,
+               borderRadius:2,
+               height: 230,
+               backgroundColor: 'white'}}> 
+        
+        {attendees.map(attendee => ( 
+          
+        <List sx={{ width: '100%', maxWidth: 463, bgcolor: 'background.paper' }} key={attendee.username}>
+            {attendee.username === host?.username &&
+           <Box sx={{position:'absolute',right:20,justifyContent:'right',float:'right',borderRadius:2,width:100,height:20,padding:0.1 ,backgroundColor: 'orange',color:'white'}}>
+            <Typography  sx={{display:'flex',justifyContent:'center'}}>Host</Typography></Box>}
+                   <ListItem alignItems="flex-start" > 
+               
+                   <ListItemAvatar>
+                       <Avatar  src={attendee.image || 'assets/user.png'} variant="square"  sx={{ width: 56, height: 56 }}/>
+                   </ListItemAvatar>
+                   <ListItem alignItems="flex-start" sx={{flexDirection:'column'}} >
+                    <Typography component={Link} to={`/profiles/${attendee.username}`} sx={{textDecoration: 'none',fontSize:19,fontFamily:'Century Gothic'}}>{attendee.displayName}</Typography>
+                    <Typography sx={{color:'orange'}}>Following</Typography>
+                    </ListItem>
+                       
+                         
                           
-                            {"Following"}
-                        </React.Fragment>} />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg"variant="square"  sx={{ width: 56, height: 56 }}/>
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary="TOM"
-                        sx={{marginLeft:2}}
-                        secondary={<React.Fragment>
-                        
-                            {"Following"}
-                        </React.Fragment>} />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                    <ListItemAvatar>
-                        <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg"variant="square"  sx={{ width: 56, height: 56 }} />
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary="BOB"
-                        sx={{marginLeft:2}}
-                        secondary={<React.Fragment>
-                          
-                            {'Following'}
-                        </React.Fragment>} />
-                </ListItem>
+               </ListItem>
+               <Divider variant="inset" component="li" />
+               </List>
+            ))}
+            
+            
              
-            </List></Box></>
+            </Box></>
           );
         }
         

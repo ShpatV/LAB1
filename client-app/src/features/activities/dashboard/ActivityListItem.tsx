@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, CardHeader, Typography, createTheme } from '@mui/material';
+import { Avatar, Button, Card, CardHeader, Typography, createTheme, Stack, Alert } from '@mui/material';
 import {format} from 'date-fns';
 import { Box } from '@mui/system';
 import React  from 'react';
@@ -7,6 +7,7 @@ import { Activity } from '../../../app/models/activity';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import {ThemeProvider} from '@mui/system';
+import ActivityListItemAttendee from './ActivityListItemAttendee';
 interface Props {
     activity: Activity
 }
@@ -56,28 +57,47 @@ export default function ActivityListItem({activity}:Props){
     return ( 
         <ThemeProvider theme={theme}>
          <Card sx={{fontSize: 16,fontFamily: 'Century Gothic'}} >
-         {/* <Grid item xs={3}> */}
-            <CardHeader 
+         {activity.isCancelled && 
+          <Typography alignItems={'center'} sx={{display:'flex',justifyContent:'center',color:'white',textAlign:'center',backgroundColor:'red'}}>Cancelled</Typography>
+            }
             
+          
+         {/* <Grid item xs={3}> */}
+            <CardHeader  sx={{display:'flex',alignItems:'flex-start'}}
              avatar={
-                <Avatar sx={{ width: 76, height: 76 }} aria-label="recipe">
+                <Avatar sx={{ width: 76, height: 76 ,marginBottom:3}} aria-label="recipe">
                   U
                 </Avatar>
               }
               title=  {
-              <Typography sx={{fontSize:25}} color="white" fontFamily={'Century Gothic '}>
+              <Typography sx={{fontSize:25,fontWeight:'bold'}} color="white" fontFamily={'Century Gothic '}>
                 {activity.title}
 
               </Typography>}
-              subheader= "Hosted by Shpati"
+              subheader=  {
+              
+  
+                <Typography component="div" sx={{color:'whitesmoke'}}>
+                Host By {activity.host?.displayName}
+              </Typography>
+              }
               
               
             >
+              
+                
+              
+              
             
               
             </CardHeader>
-            {/* </Grid> */}
-               
+             {/* </Grid> */}
+            {activity.isHost && (
+                 <Alert icon={false} severity="success" sx={{width:'50%',color:'orange'}}>You are hosting this activity</Alert>
+              )}
+                {activity.isGoing && !activity.isHost && (
+                <Alert icon={false} severity="success" sx={{color:'green',wdith:'50%'}}>You are going this activity</Alert>
+              )}
          
             <Card sx={{width:624, height:50,backgroundColor:'#fafafa'}} >
                 <Box sx={{marginTop:1.3,marginLeft:2.5}}>
@@ -91,12 +111,12 @@ export default function ActivityListItem({activity}:Props){
 
             <Card sx={{
               width:624,
-              height:50,
+              height:70,
                 backgroundColor:'#E5E4E2',
                
                 }} >
             
-            <Box style={{marginTop:13}}><Typography fontFamily={'Century Gothic'} fontSize={15} sx={{marginLeft:2,marginTop:13}}> Attendees go here</Typography></Box>
+            <Box> <ActivityListItemAttendee attendees={activity.attendees!}/></Box>
                
             </Card>
             <Card sx={{
