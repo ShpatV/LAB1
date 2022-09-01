@@ -94,7 +94,7 @@ export default observer( function NavBar(){
                   anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
                   <MenuItem>
-                    <Avatar component={Link} to={`/profile/${user?.username}`} /> {user?.displayName}
+                    <Avatar component={Link} to={`/profiles/${user?.username}`} /> {user?.displayName}
                   </MenuItem>
                   <MenuItem>
                     <Avatar /> My account

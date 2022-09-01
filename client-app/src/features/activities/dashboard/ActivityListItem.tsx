@@ -65,12 +65,12 @@ export default function ActivityListItem({activity}:Props){
          {/* <Grid item xs={3}> */}
             <CardHeader  sx={{display:'flex',alignItems:'flex-start'}}
              avatar={
-                <Avatar sx={{ width: 76, height: 76 ,marginBottom:3}} aria-label="recipe">
+                <Avatar src={activity.host?.image || '/assets/user.png'} sx={{ width: 76, height: 76 ,marginBottom:3}} aria-label="recipe">
                   U
                 </Avatar>
               }
               title=  {
-              <Typography sx={{fontSize:25,fontWeight:'bold'}} color="white" fontFamily={'Century Gothic '}>
+              <Typography component={Link} to={`/activities/${activity.id}`} sx={{fontSize:25,fontWeight:'bold'}} color="white" fontFamily={'Century Gothic '}>
                 {activity.title}
 
               </Typography>}
@@ -78,18 +78,12 @@ export default function ActivityListItem({activity}:Props){
               
   
                 <Typography component="div" sx={{color:'whitesmoke'}}>
-                Host By {activity.host?.displayName}
+                Host By <Link to={`profiles/${activity.hostUsername}`}> {activity.host?.displayName}</Link>
               </Typography>
               }
               
               
-            >
-              
-                
-              
-              
-            
-              
+            >  
             </CardHeader>
              {/* </Grid> */}
             {activity.isHost && (
