@@ -12,12 +12,13 @@ import Grid from '@mui/material/Grid';
 
 export default observer(function ActivityDetails(){
     const {activityStore} = useStore();
-    const {selectedActivity: activity,loadActivity,loadingInitial} = activityStore;
+    const {selectedActivity: activity,loadActivity,loadingInitial, clearSelectedActivity} = activityStore;
     const {id} = useParams<{id: string}>();
 
     useEffect(() =>{
         if(id) loadActivity(id);
-    }, [id,loadActivity]);
+        return () => clearSelectedActivity();
+    }, [id,loadActivity, clearSelectedActivity]);
 
     if (loadingInitial || !activity) return <LoadingComponent content='Loading activity...' />;
 
@@ -41,7 +42,7 @@ export default observer(function ActivityDetails(){
         <Grid item xs={12} sm={6} md={9}>
         <ActivityDetailedHeader activity={activity} />
         <ActivityDetailedInfo activity={activity}/>
-        <ActivityDetailedChat />
+        <ActivityDetailedChat activityId = {activity.id}  />
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
         <ActivityDetailedSidebar activity={activity} />

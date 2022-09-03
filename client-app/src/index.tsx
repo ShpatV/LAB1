@@ -11,7 +11,7 @@ import { store, StoreContext } from './app/stores/store';
 import { Router } from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 // import './index.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 export const history = createBrowserHistory();
 
 const root = ReactDOM.createRoot(
