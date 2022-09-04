@@ -10,6 +10,11 @@ interface Props{
 }
 
 export default observer( function ActivityListItemAttendee({attendees}: Props) {
+    const styles ={
+        bordercolor: 'orange',
+        borderWidth: 3
+    }
+
     const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
 
   const handlePopoverOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -31,7 +36,7 @@ export default observer( function ActivityListItemAttendee({attendees}: Props) {
                  onMouseEnter={handlePopoverOpen}
                  onMouseLeave={handlePopoverClose} alignItems="flex-start" key={attendee.username} component={Link} to={`/profiles/${attendee.username}`}>
                     <ListItemAvatar>
-                        <Avatar src={attendee.image || "/assets/user.png"} />
+                        <Avatar  sx={attendee.following ? styles : null} src={attendee.image || "/assets/user.png"} />
                     </ListItemAvatar>
                 </ListItem>
                 <Popover

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -15,12 +15,14 @@ import { Button } from '@mantine/core';
 import Item from 'antd/lib/descriptions/Item';
 import { Profile } from '../../app/models/profile';
 import { observer } from 'mobx-react-lite';
+import FollowButton from './FollowButton';
 
 interface Props {
     profile: Profile;
 }
 
 export default observer ( function ProfileHeader({profile}: Props) {
+
     const theme = useTheme();
     return(
         <Card sx={{ display: 'flex' }}>
@@ -48,23 +50,17 @@ export default observer ( function ProfileHeader({profile}: Props) {
       
         <Grid container rowSpacing={2} columnSpacing={{ xs: 3, sm: 2, md: 2 }} sx={{padding:2}}>
         <Grid  item xs={5}>
-        <Item><Statistic style={{fontSize:20,fontFamily:'Century Gothic',fontWeight:'bold'}}  value={5} title="Followers" />
+        <Item><Statistic style={{fontSize:20,fontFamily:'Century Gothic',fontWeight:'bold'}}  value={profile.followersCount} title="Followers" />
         
         </Item>
         </Grid>
         <Grid item xs={2} >
-        <Item><Statistic style={{fontSize:20,fontFamily:'Century Gothic',fontWeight:'bold'}} title="Following" value={42} /></Item>
+        <Item><Statistic style={{fontSize:20,fontFamily:'Century Gothic',fontWeight:'bold'}} title="Following" value={profile.followingCount} /></Item>
         </Grid>
+        <Divider />
+        <FollowButton profile={profile} />
 
-        <Grid item xs={2} >
-        <Item><Button>Following</Button></Item>
-        </Grid>
-        
-        <Grid item xs={6} md >
-        
-        <Item><Button sx={{width:240}} color={true ? 'red' : 'green'} >{true ? 'Unfollow' : 'Follow' } </Button>
-         </Item>
-        </Grid>
+       
 
         
         

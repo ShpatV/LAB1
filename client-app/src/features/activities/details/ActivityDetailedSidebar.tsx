@@ -45,7 +45,8 @@ export default observer(function ActivityDetailedSidebar ({activity: {attendees,
                    </ListItemAvatar>
                    <ListItem alignItems="flex-start" sx={{flexDirection:'column'}} >
                     <Typography component={Link} to={`/profiles/${attendee.username}`} sx={{textDecoration: 'none',fontSize:19,fontFamily:'Century Gothic'}}>{attendee.displayName}</Typography>
-                    <Typography sx={{color:'orange'}}>Following</Typography>
+                    {attendee.following &&
+                    <Typography sx={{color:'orange'}}>Following</Typography>}
                     </ListItem>
                        
                          

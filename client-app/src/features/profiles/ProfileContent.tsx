@@ -7,6 +7,9 @@ import ProfilePhotos from './ProfilePhotos';
 import { Profile } from '../../app/models/profile';
 import { observer } from 'mobx-react-lite';
 import { styled } from '@mui/material';
+import ProfileAbout from './ProfileAbout';
+import ProfileFollowings from './ProfileFollowings';
+import { useStore } from '../../app/stores/store';
 
 type TabPanelProps = {
   children: React.ReactNode;
@@ -36,15 +39,11 @@ const TabPanel = styled((props: TabPanelProps) => {
   );
 })<TabPanelProps>();
 
-function a11yProps(index: number) {
-  return {
-    id: `vertical-tab-${index}`,
-    'aria-controls': `vertical-tabpanel-${index}`,
-  };
-}
+
 
 export default observer (function ProfileContent({profile} : Props) {
   const [value, setValue] = React.useState(0);
+  const {profileStore} = useStore();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -59,19 +58,21 @@ export default observer (function ProfileContent({profile} : Props) {
         variant="scrollable"
         value={value}
         onChange={handleChange}
+        //(e, data) => profileStore.setActiveTab(data.activeIndex)
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
+      
       >
-        <Tab label="Item One" {...a11yProps(0)} />
-        <Tab label="Photos" {...a11yProps(1)} />
-        <Tab label="Item Three" {...a11yProps(2)} />
-        <Tab label="Item Four" {...a11yProps(3)} />
-        <Tab label="Item Five" {...a11yProps(4)} />
+        <Tab label="About"  />
+        <Tab label="Photos"  />
+        <Tab label="Events" />
+        <Tab label="Followers" />
+        <Tab label="Following"  />
   
       </Tabs>
       <Box sx={{width:800,height:300}}>
       <TabPanel  value={value} index={0}>
-        Item One
+        <ProfileAbout />
       </TabPanel>
       <TabPanel sx={{width:1040,height:300}} value={value} index={1} >
        <ProfilePhotos profile={profile} />
@@ -80,10 +81,10 @@ export default observer (function ProfileContent({profile} : Props) {
         Item Three
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <ProfileFollowings />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Item Five
+      <ProfileFollowings />
       </TabPanel>
       </Box>
     </Box>
