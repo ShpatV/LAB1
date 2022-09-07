@@ -30,6 +30,7 @@
     "@types/react": "^18.0.6",
     "@types/react-calendar": "^3.5.1",
     "@types/react-dom": "^18.0.2",
+    "@types/react-infinite-scroller": "^1.2.3",
     "antd": "^4.22.8",
     "axios": "^0.26.1",
     "bootstrap": "^5.2.0",
@@ -48,7 +49,9 @@
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.0.0",
     "react-dropzone": "^14.2.2",
+    "react-infinite-scroller": "^1.2.6",
     "react-router-dom": "^5.2.0",
+    "react-router-hash-link": "^2.4.3",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.6",
     "styled-components": "^5.3.5",
@@ -84,6 +87,7 @@
   "devDependencies": {
     "@types/react-datepicker": "^4.4.2",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-router-hash-link": "^2.4.5",
     "@types/uuid": "^8.3.4",
     "@types/yup": "^0.29.14"
   }

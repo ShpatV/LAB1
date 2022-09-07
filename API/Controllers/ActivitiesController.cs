@@ -4,6 +4,7 @@ using Domain;
 using System;
 using Application.Activities;
 using Microsoft.AspNetCore.Authorization;
+using Application.Core;
 
 namespace API.Controllers
 
@@ -15,9 +16,9 @@ namespace API.Controllers
       
 
         [HttpGet]
-        public async Task<IActionResult> GetActivities()
+        public async Task<IActionResult> GetActivities([FromQuery]ActivityParams param)
         {
-            return HandleResult (await Mediator.Send(new List.Query()));//kthen response back te mediatr handler dhe mirret prej baseApicontroller
+            return HandlePagedResult (await Mediator.Send(new List.Query{Params = param}));//kthen response back te mediatr handler dhe mirret prej baseApicontroller
         }
 
 
