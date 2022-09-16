@@ -1,15 +1,14 @@
-import React, { ChangeEvent,useEffect,useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import Box from '@mui/material/Box';
-import Button, { ButtonProps } from '@mui/material/Button';
+import Button from '@mui/material/Button';
 
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import {v4 as uuid} from 'uuid';
-import { Formik, Form, ErrorMessage, Field,  } from 'formik';
-import { Alert, FormControl, FormControlLabel, FormLabel, Paper, styled, TextField, Typography } from '@mui/material';
-import { grey, purple } from '@mui/material/colors';
+import { Formik, Form } from 'formik';
+import { Paper, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
 import MyTextArea from './MyTextArea';
@@ -17,7 +16,7 @@ import MySelectInput from './MySelectInput';
 import { categoryOptions } from '../../../app/common/options/categoryOptions';
 import MyDateInput from './MyDateInput';
 import { ActivityFormValues } from '../../../app/models/activity';
-
+import createImg from '../../../assets/img/create.svg';
 
 export default observer( function ActivityForm(){
   const history = useHistory();
@@ -61,43 +60,45 @@ export default observer( function ActivityForm(){
   
 
     return(
-      // <form onSubmit={handleSubmit} autoComplete='off'>
-      
-          <Paper sx={{padding:1.4,height:600,maxWidth:'100%'}}>
-            <Typography sx={{color:'teal'}}>Activity Details</Typography>
-            <Formik 
+    
+      <><Box sx={{ padding: 1.4, weight:200,height: 600, maxWidth: '100%',float:'right'}}>
+        <Typography sx={{ color: 'teal' }}><img src={createImg} style={{ width: 400, height: 500 }} /></Typography>
+      </Box><Paper sx={{ padding: 1.4, height: 600,width:700 }}>
+
+
+          <Formik
             validationSchema={validationSchema}
             enableReinitialize
-             initialValues={activity}
-              onSubmit={values => handleFormSubmit(values)}>
-              {({handleSubmit, isValid, isSubmitting ,dirty}) => (
-               
-                 <Box component="form"  sx={{margin:2,flexDirection:'column',display:'flex',maxWidth:'100%',height:400,color:'blue'}}  onSubmit={handleSubmit} autoComplete="off" > 
-                  <MyTextInput  name='title' placeholder='Title' />
-                   
-                   <MyTextArea rows={3} placeholder='Description' name='description' />
-                   <MySelectInput  />
-                   <MyDateInput 
-                    placeholderText='Date'
-                    name='date'
-                    showTimeSelect
-                    timeCaption='time'
-                    dateFormat='MMMM d, yyyy h:mm aa'
-                    />
-                   <Typography sx={{color:'teal'}}>Location Details</Typography>
-                   <MyTextInput placeholder='City' name='city' />
-                   <MyTextInput placeholder='Venue' name='venue' />
-              <Button 
-              disabled={isSubmitting || !dirty || !isValid}
-              sx={{float:'right',margin:1}} type='submit' variant="contained" color="success">Submit</Button>
-              <Button sx={{float:'right',margin:1,color:'grey'}}  component={Link} to='/activities'  variant="contained" type='button'>Cancel</Button>
-          
-            </Box> 
+            initialValues={activity}
+            onSubmit={values => handleFormSubmit(values)}>
+            {({ handleSubmit, isValid, isSubmitting, dirty }) => (
 
-              )}
 
-            </Formik>
-            </Paper>
+              <Form className='className="mb-3' onSubmit={handleSubmit} autoComplete='off'>
+                <MyTextInput name='title' placeholder='Title' />
+
+                <MyTextArea rows={3} placeholder='Description' name='description' />
+                <MySelectInput placeholder='Category' name='category' />
+                <MyDateInput
+                  placeholderText='Date'
+                  name='date'
+                  showTimeSelect
+                  timeCaption='time'
+                  dateFormat='MMMM d, yyyy h:mm aa' />
+                <Typography sx={{ color: 'teal' }}>Location Details</Typography>
+                <MyTextInput placeholder='City' name='city' />
+                <MyTextInput placeholder='Venue' name='venue' />
+                <Button
+                  disabled={isSubmitting || !dirty || !isValid}
+                  sx={{ float: 'right', margin: 1 }} type='submit' variant="contained" color="success">Submit</Button>
+                <Button sx={{ float: 'right', margin: 1, color: 'grey' }} component={Link} to='/activities' variant="contained" type='button'>Cancel</Button>
+
+              </Form>
+
+            )}
+
+          </Formik>
+        </Paper></>
              
    
          

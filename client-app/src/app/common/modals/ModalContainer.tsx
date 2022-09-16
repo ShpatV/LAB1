@@ -18,12 +18,12 @@ export default  observer (function ModalContainer() {
     const {modalStore} = useStore();
 
     return (
-        <Modal open={modalStore.modal.open} onClose={modalStore.closeModal}>
-            <Box sx={style}>
-          <Typography id="keep-mounted-modal-title" variant="h6" component="h2">
+        // <Modal open={modalStore.modal.open} onClose={modalStore.closeModal}>
+           
+          <Typography sx={{marginTop:20}} id="keep-mounted-modal-title" variant="h6" component="h2">
             {modalStore.modal.body}
           </Typography>
-        </Box>
-      </Modal>
+     
+    //   </Modal>
     )
 })

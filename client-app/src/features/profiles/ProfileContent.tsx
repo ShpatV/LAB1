@@ -90,3 +90,62 @@ export default observer (function ProfileContent({profile} : Props) {
     </Box>
   );
 })
+
+
+
+// import * as React from 'react';
+
+
+// import ProfilePhotos from './ProfilePhotos';
+// import { Profile } from '../../app/models/profile';
+// import { observer } from 'mobx-react-lite';
+
+// import ProfileAbout from './ProfileAbout';
+// import ProfileFollowings from './ProfileFollowings';
+// import { useStore } from '../../app/stores/store';
+// import { Box, Flex, Icon, SegmentedControl, Text } from "gestalt";
+// import { Typography } from '@mui/material';
+
+
+
+
+// export default observer (function ProfileContent({profile} : Props) {
+//   const [itemIndex, setItemIndex] = React.useState(0);
+//   const {profileStore} = useStore();
+
+//   const items = [
+//     'News',
+//     'You',
+//     'Messages',
+//     <Icon
+//       icon="pin"
+//       accessibilityLabel="Pin"
+//       color="default"
+//     />,
+//   ];
+
+//   const content = [
+//     <><ProfileAbout />
+//     <ProfilePhotos profile={profile} />
+//     <Typography>ssss</Typography>
+//     <ProfileFollowings />
+//     <ProfileFollowings />
+    
+//     </>
+  
+//   ];
+
+//   return (
+//     <Flex direction="column" >
+//       <SegmentedControl
+//         items={items}
+//         selectedItemIndex={itemIndex}
+//         onChange={(e: any, data: { activeIndex: any; }) => profileStore.setActiveTab(data.activeIndex)}
+//       />
+
+//       <Box borderStyle="shadow" padding={6} rounding={2}>
+//         <Text>{content[itemIndex]}</Text>
+//       </Box>
+//     </Flex>
+//   );
+// })

@@ -1,7 +1,8 @@
 import { Box, FilledInput, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, Grid, Input, InputAdornment, InputBase, InputLabel, OutlinedInput, TextareaAutosize, TextField, Typography } from '@mui/material';
-import { Field, Form, useField } from 'formik';
+import { Field, useField } from 'formik';
 import { TextArea } from 'gestalt';
 import React from 'react';
+import { Form } from 'react-bootstrap';
 // import './input.css';
 
 interface Props {
@@ -17,14 +18,14 @@ export default function MyTextArea(props: Props){
         
         
            
-            <FormControl sx={{padding:2,marginDense:15,fontFamily:'Century Gothic',borderRadius:50,color:'red'}} error={meta.touched && !!meta.error}>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             
             <label >{props.label}</label>
-            <TextareaAutosize maxRows={5} {...field} {...props} />
+            <Form.Control as="textarea"  {...field} {...props} />
             {meta.touched && meta.error ? (
                 <label  >{meta.error}</label>
              ): null}
-             </FormControl>
+             </Form.Group>
 
     )
 

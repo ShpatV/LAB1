@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './app/layout/styles.css';
+// import './features/home/App.css';
 import App from './app/layout/App';
 import '@mui/material';
 import 'react-calendar/dist/Calendar.css'
@@ -22,6 +23,7 @@ root.render(
     <Router history={history}>
        <App />
     </Router>
+    
   </StoreContext.Provider>
     
 );
