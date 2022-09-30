@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from '@mui/material/Container';
 import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
@@ -20,12 +20,19 @@ import LoadingComponent from './LoadingComponent';
 import ProfilePage from '../../features/profiles/ProfilePage';
 import ModalContainer from '../common/modals/ModalContainer';
 import BannerHome from '../../features/home/BannerHome';
+import EmailActivityDashboard from '../../features/emailactivities/dashboard/EmailActivityDashboard';
+import axios from 'axios';
+import EmailActivityForm from '../../features/emailactivities/formEmail/EmailActivityForm';
 
 
 
 function App() {
   const location = useLocation();
   const {commonStore,userStore} = useStore();
+
+
+
+
 
   useEffect(() => {
     if (commonStore.token){
@@ -56,8 +63,13 @@ function App() {
 
               
                 <Route exact path='/activities' component={ActivityDashboard} />
+                <Route  path='/emailactivities' component={EmailActivityDashboard} />
                   <Route path='/activities/:id' component={ActivityDetails} />
+                  {/* <BookDashboard books={books}/>
+               */}
+
                   <Route key={location.key} path={['/createActivity', '/manage/:id']} component={ActivityForm} />
+                  <Route key={location.key} path={['/createEmailActivity']} component={EmailActivityForm} />
                   <Route path= '/profiles/:username' component={ProfilePage} />
                   <Route path= '/errors' component={TestErrors} />
                   <Route path= '/server-error' component={ServerError} />

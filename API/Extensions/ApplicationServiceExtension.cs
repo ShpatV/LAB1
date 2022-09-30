@@ -1,5 +1,6 @@
 using Application.Activities;
 using Application.Core;
+using Application.EmailActivities;
 using Application.Interfaces;
 using AutoMapper;
 using Infrastructure.Photos;
@@ -26,6 +27,12 @@ namespace API.Extensions
             {
                 opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
             });
+            // for email
+            //  services.AddDbContext<DataContextE>(opt => 
+            // {
+            //     opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            // });
+            
             services.AddCors(opt => 
             {
                 opt.AddPolicy("CorsPolicy", policy => 
@@ -38,6 +45,7 @@ namespace API.Extensions
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
+            services.AddMediatR(typeof(EmailList.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();

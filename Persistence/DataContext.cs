@@ -15,6 +15,13 @@ namespace Persistence
 
         public DbSet<UserFollowing> UserFollowings { get; set; }
 
+        public DbSet<EmailActivity> EmailActivities {get; set;}
+
+        public DbSet<Author> Authors { get; set;}
+        
+        public DbSet<Book> Books { get; set;}
+        
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

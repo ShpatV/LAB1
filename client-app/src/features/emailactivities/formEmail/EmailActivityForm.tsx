@@ -11,27 +11,26 @@ import { Formik, Form } from 'formik';
 import { Paper, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
-import MyTextArea from './MyTextArea';
-import MySelectInput from './MySelectInput';
+import MyTextArea from './EmailMyTextArea';
+
 import { categoryOptions } from '../../../app/common/options/categoryOptions';
-import MyDateInput from './MyDateInput';
-import { ActivityFormValues } from '../../../app/models/activity';
+import MyDateInput from './EmailMyDateInput';
+import { EmailActivityFormValues } from '../../../app/models/emailactivity';
 import createImg from '../../../assets/img/create.svg';
 
-export default observer( function ActivityForm(){
+export default observer( function EmailActivityForm(){
   const history = useHistory();
-  const {activityStore}= useStore();
-  const {createActivity,updateActivity,loadActivity,loadingInitial}=activityStore;
+  const {emailActivityStore}= useStore();
+  const {createEmailActivity,loadEmailActivity,loadingInitial}=emailActivityStore;
   const {id} = useParams<{id: string}>();
 
-  const [activity,setActivity] = useState<ActivityFormValues>(new ActivityFormValues());
+  const [emailActivity,setEmailActivity] = useState<EmailActivityFormValues>(new EmailActivityFormValues());
 
   const validationSchema = Yup.object({
-    title: Yup.string().required('The activity title is required'),
-    description: Yup.string().required('The activity description is required'),
-    category: Yup.string().required(),
+    username: Yup.string().required('The activity title is required'),
+    adress: Yup.string().required('The activity description is required'),
     date: Yup.string().required('Date is required').nullable(),
-    venue: Yup.string().required(),
+    email: Yup.string().required(),
     city: Yup.string().required(),
 
   });
@@ -40,18 +39,18 @@ export default observer( function ActivityForm(){
 
 
   useEffect(() =>{
-    if(id) loadActivity(id).then(activity => setActivity(new ActivityFormValues(activity)))
-  }, [id, loadActivity]);
+    if(id) loadEmailActivity(id).then(activity => setEmailActivity(new EmailActivityFormValues(emailActivity)))
+  }, [id, loadEmailActivity]);
 
-  function handleFormSubmit(activity: ActivityFormValues){
-    if (!activity.id) {
-      let newActivity = {
-        ...activity,
+  function handleFormSubmit(emailActivity: EmailActivityFormValues){
+    if (!emailActivity.id) {
+      let newEmailActivity = {
+        ...emailActivity,
         id: uuid()
-      };createActivity(newActivity).then(() => history.push(`/activities/${newActivity.id}`))
-    }else {
-      updateActivity(activity).then(() => history.push(`/activities/${activity.id}`))
+      };
+      createEmailActivity(newEmailActivity).then(() => history.push(`/emailactivities/${newEmailActivity.id}`))
     }
+    
   }
 
 
@@ -68,16 +67,17 @@ export default observer( function ActivityForm(){
           <Formik
             validationSchema={validationSchema}
             enableReinitialize
-            initialValues={activity}
+            initialValues={emailActivity}
             onSubmit={values => handleFormSubmit(values)}>
             {({ handleSubmit, isValid, isSubmitting, dirty }) => (
 
 
               <Form className='className="mb-3' onSubmit={handleSubmit} autoComplete='off'>
-                <MyTextInput name='title' placeholder='Title' />
+                <MyTextInput name='username' placeholder='Username' />
+                <MyTextInput placeholder='email' name='Email' />
 
-                <MyTextArea rows={3} placeholder='Description' name='description' />
-                <MySelectInput placeholder='Category' name='category' />
+                <MyTextArea rows={3} placeholder='message' name='Message' />
+             
                 <MyDateInput
                   placeholderText='Date'
                   name='date'
@@ -85,12 +85,12 @@ export default observer( function ActivityForm(){
                   timeCaption='time'
                   dateFormat='MMMM d, yyyy h:mm aa' />
                 <Typography sx={{ color: 'teal' }}>Location Details</Typography>
-                <MyTextInput placeholder='City' name='city' />
-                <MyTextInput placeholder='Venue' name='venue' />
+                <MyTextInput placeholder='adress' name='Adress' />
+              
                 <Button
                   disabled={isSubmitting || !dirty || !isValid}
                   sx={{ float: 'right', margin: 1 }} type='submit' variant="contained" color="success">Submit</Button>
-                <Button sx={{ float: 'right', margin: 1, color: 'grey' }} component={Link} to='/activities' variant="contained" type='button'>Cancel</Button>
+                <Button sx={{ float: 'right', margin: 1, color: 'grey' }} component={Link} to='/emailactivities' variant="contained" type='button'>Cancel</Button>
 
               </Form>
 

@@ -12,6 +12,9 @@ namespace Application.Core
         {
             string currentUsername = null;
             CreateMap<Activity, Activity>();
+            //
+            CreateMap<EmailActivity, EmailActivity>();
+            //
             CreateMap<Activity, ActivityDto>()
                 .ForMember(d => d.HostUsername, o => o.MapFrom(s => s.Attendees
                     .FirstOrDefault(x=> x.IsHost).AppUser.UserName ));
@@ -35,6 +38,8 @@ namespace Application.Core
                 .ForMember(d=> d.DisplayName, o=> o.MapFrom(s=> s.Author.DisplayName))
                 .ForMember(d=> d.Username, o=> o.MapFrom(s=> s.Author.UserName))
                 .ForMember(d=> d.Image, o=> o.MapFrom(s=> s.Author.Photos.FirstOrDefault(x=>x.IsMain).Url));
+                
+            CreateMap<Book, Book>();    
         }
     }
 }

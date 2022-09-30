@@ -4,6 +4,8 @@ import { request } from 'http';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { Activity, ActivityFormValues } from '../models/activity';
+import { Book } from '../models/book';
+import { EmailActivity, EmailActivityFormValues } from '../models/emailactivity';
 import { PaginatedResult } from '../models/Pagination';
 import { Photo, Profile } from '../models/profile';
 import { User, UserFormValues } from '../models/user';
@@ -87,6 +89,14 @@ const Account= {
     register: (user: UserFormValues) => requests.post<User>('/account/register' , user)
 }
 
+const EmailActivities =  {
+    list: () => axios.get<EmailActivity[]>('/emailactivities'),
+    details: (id: string) => requests.get<EmailActivity>(`/emailactivities/${id}`),
+    create: (emailActivity : EmailActivityFormValues)=> requests.post<void>('/emailactivities', emailActivity),
+    // update: (activity:ActivityFormValues)=> requests.put<void>(`/activities/${activity.id}`,activity),
+    delete: (id:string)=> requests.del(`/emailactivities/${id}`)
+}
+
 const Profiles = {
     get: (username: string) => requests.get<Profile>(`/profiles/${username}`),
     uploadPhoto: (file:Blob) => {
@@ -103,12 +113,22 @@ const Profiles = {
     listFollowings: (username: string, predicate: string) => requests.get<Profile[]>(`/follow/${username}?predicate=${predicate}`)//endpoint napi
 }
 
+const Books = {
+    list: () => axios.get<Book[]>('/books'),
+    details: (id: string) => requests.get<Book>(`/books/${id}`),
+    // create: (emailActivity : EmailActivityFormValues)=> requests.post<void>('/books', emailActivity),
+    // update: (activity:ActivityFormValues)=> requests.put<void>(`/activities/${activity.id}`,activity),
+    delete: (id:string)=> requests.del<void>(`/books/${id}`)
+}
+
 
 
 const agent = {
     Activities,
     Account,
-    Profiles
+    Profiles,
+    EmailActivities,
+    Books
 }
 
 export default agent;

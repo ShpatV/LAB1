@@ -27,9 +27,14 @@ namespace API
 
            try{
                var context = services.GetRequiredService<DataContext>();
+            //    var contextEmail = services.GetRequiredService<DataContextE>();
+            //    await contextEmail.Database.MigrateAsync();
                var userManager = services.GetRequiredService<UserManager<AppUser>>();
+               
                await context.Database.MigrateAsync();
                await Seed.SeedData(context, userManager);
+                await SeedE.SeedData(context);
+               
            }
            catch(Exception ex)
            {
