@@ -65,6 +65,7 @@ return (
                   <p style={{color:'pink',fontFamily:'Tuesday night',fontSize:40}}> "The best is when you find a book you can't put down."</p>
                   <button  onClick={() => console.log('connect')}><a href="/activities" style={{color:'white'}}>Let’s Connect</a> <ArrowRightCircle size={25} /></button>
                   <button  onClick={() => console.log('connect')}><a href="/emailactivities" style={{color:'white'}}>Contact Us</a> <ArrowRightCircle size={25} /></button>
+                  <button  onClick={() => console.log('connect')}><a href="/suggestionactivities" style={{color:'white'}}>Suggestions</a> <ArrowRightCircle size={25} /></button>
               </div>}
             </TrackVisibility>
           </Col>

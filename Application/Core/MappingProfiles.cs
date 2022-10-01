@@ -15,6 +15,8 @@ namespace Application.Core
             //
             CreateMap<EmailActivity, EmailActivity>();
             //
+            CreateMap<SuggestionActivity, SuggestionActivity>();
+            //
             CreateMap<Activity, ActivityDto>()
                 .ForMember(d => d.HostUsername, o => o.MapFrom(s => s.Attendees
                     .FirstOrDefault(x=> x.IsHost).AppUser.UserName ));

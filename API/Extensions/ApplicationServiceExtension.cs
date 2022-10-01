@@ -2,6 +2,7 @@ using Application.Activities;
 using Application.Core;
 using Application.EmailActivities;
 using Application.Interfaces;
+using Application.SuggestionActivities;
 using AutoMapper;
 using Infrastructure.Photos;
 using Infrastructure.Security;
@@ -46,6 +47,7 @@ namespace API.Extensions
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddMediatR(typeof(EmailList.Handler).Assembly);
+            services.AddMediatR(typeof(SuggestionList.Handler).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();

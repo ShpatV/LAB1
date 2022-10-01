@@ -20,6 +20,8 @@ namespace Persistence
         public DbSet<Author> Authors { get; set;}
         
         public DbSet<Book> Books { get; set;}
+
+         public DbSet<SuggestionActivity> SuggestionActivities {get; set;}
         
 
         protected override void OnModelCreating(ModelBuilder builder)

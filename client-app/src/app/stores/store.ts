@@ -6,6 +6,7 @@ import ModalStore from "./modalStore";
 import ProfileStore from "./profileStore";
 import EmailActivityStore from "./emailActivityStore";
 import CommentStore from "./commentStore";
+import SuggestionActivityStore from "./suggestionActivityStore";
 
 interface Store {
     activityStore: ActivityStore// klasa mirret dhe perdoret si type
@@ -15,6 +16,7 @@ interface Store {
     profileStore: ProfileStore;
     commentStore: CommentStore;
     emailActivityStore: EmailActivityStore;
+    suggestionActivityStore: SuggestionActivityStore;
 }
 
 export const store: Store = {
@@ -24,7 +26,8 @@ export const store: Store = {
     modalStore: new ModalStore(),
     profileStore: new ProfileStore(),
     commentStore: new CommentStore(),
-    emailActivityStore: new EmailActivityStore()
+    emailActivityStore: new EmailActivityStore(),
+    suggestionActivityStore: new SuggestionActivityStore()
 }
 
 export const StoreContext = createContext(store);

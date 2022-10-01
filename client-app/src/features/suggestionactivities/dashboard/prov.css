@@ -1,0 +1,13 @@
+body {
+ 
+    height: 1200px;
+     font-weight: 400;
+     overflow-x: hidden;
+     position: relative;
+   
+ 
+     background:linear-gradient( to right,#0D324d, #527996) !important;
+   
+     font-family: 'Centra', sans-serif !important;
+   }
+   

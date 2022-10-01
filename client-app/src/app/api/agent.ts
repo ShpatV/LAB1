@@ -8,6 +8,7 @@ import { Book } from '../models/book';
 import { EmailActivity, EmailActivityFormValues } from '../models/emailactivity';
 import { PaginatedResult } from '../models/Pagination';
 import { Photo, Profile } from '../models/profile';
+import { SuggestionActivity, SuggestionActivityFormValues } from '../models/suggestionactivity';
 import { User, UserFormValues } from '../models/user';
 import { store } from '../stores/store';
 
@@ -97,6 +98,16 @@ const EmailActivities =  {
     delete: (id:string)=> requests.del(`/emailactivities/${id}`)
 }
 
+const SuggestionActivities =  {
+    list: () => axios.get<SuggestionActivity[]>('/suggestionactivities'),
+    details: (id: string) => requests.get<SuggestionActivity>(`/suggestionactivities/${id}`),
+    create: (suggestionActivity : SuggestionActivityFormValues)=> requests.post<void>('/suggestionactivities', suggestionActivity),
+    update: (suggestionActivity:SuggestionActivityFormValues)=> requests.put<void>(`/suggesitonactivities/${suggestionActivity.id}`,suggestionActivity),
+    delete: (id:string)=> requests.del(`/suggesitonactivities/${id}`),
+    attend: (id: string) => requests.post<void>(`/suggestionactivities/${id}/attend`,{})
+}
+
+
 const Profiles = {
     get: (username: string) => requests.get<Profile>(`/profiles/${username}`),
     uploadPhoto: (file:Blob) => {
@@ -128,7 +139,7 @@ const agent = {
     Account,
     Profiles,
     EmailActivities,
-    Books
+    SuggestionActivities
 }
 
 export default agent;

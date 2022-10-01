@@ -33,7 +33,9 @@ namespace API
                
                await context.Database.MigrateAsync();
                await Seed.SeedData(context, userManager);
-                await SeedE.SeedData(context);
+               await SeedE.SeedData(context);
+               await SeedS.SeedData(context);
+
                
            }
            catch(Exception ex)

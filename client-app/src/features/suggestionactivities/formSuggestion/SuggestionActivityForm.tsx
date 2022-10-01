@@ -11,26 +11,30 @@ import { Formik, Form } from 'formik';
 import { Paper, Typography } from '@mui/material';
 import * as Yup from 'yup';
 import MyTextInput from '../../../app/common/form/MyTextInput';
-import MyTextArea from './EmailMyTextArea';
+import MyTextArea from './SuggestionMyTextArea';
 
 import { categoryOptions } from '../../../app/common/options/categoryOptions';
-import MyDateInput from './EmailMyDateInput';
-import { EmailActivityFormValues } from '../../../app/models/emailactivity';
+import MyDateInput from './SuggestionMyDateInput';
+import { SuggestionActivityFormValues } from '../../../app/models/suggestionactivity';
 import createImg from '../../../assets/img/create.svg';
+import MySelectInput from '../../activities/form/MySelectInput';
+import SuggestionMySelectInput from './SuggestionMySelectInput';
+import SuggestionMyDateInput from './SuggestionMyDateInput';
 
-export default observer( function EmailActivityForm(){
+export default observer( function SuggestionActivityForm(){
   const history = useHistory();
-  const {emailActivityStore}= useStore();
-  const {createEmailActivity,loadEmailActivity,loadingInitial}=emailActivityStore;
+  const {suggestionActivityStore}= useStore();
+  const {createSuggestionActivity,loadSuggestionActivity,loadingInitial}=suggestionActivityStore;
   const {id} = useParams<{id: string}>();
 
-  const [emailActivity,setEmailActivity] = useState<EmailActivityFormValues>(new EmailActivityFormValues());
+  const [suggestionActivity,setSuggestionActivity] = useState<SuggestionActivityFormValues>(new SuggestionActivityFormValues());
 
   const validationSchema = Yup.object({
-    username: Yup.string().required('The activity title is required'),
-    adress: Yup.string().required('The activity description is required'),
+    title: Yup.string().required('The activity title is required'),
+    description: Yup.string().required('The activity description is required'),
+    category: Yup.string().required(),
     date: Yup.string().required('Date is required').nullable(),
-    message: Yup.string().required(),
+    venue: Yup.string().required(),
     city: Yup.string().required(),
 
   });
@@ -39,16 +43,16 @@ export default observer( function EmailActivityForm(){
 
 
   useEffect(() =>{
-    if(id) loadEmailActivity(id).then(activity => setEmailActivity(new EmailActivityFormValues(emailActivity)))
-  }, [id, loadEmailActivity]);
+    if(id) loadSuggestionActivity(id).then(suggestionActivity => setSuggestionActivity(new SuggestionActivityFormValues(suggestionActivity)))
+  }, [id, loadSuggestionActivity]);
 
-  function handleFormSubmit(emailActivity: EmailActivityFormValues){
-    if (!emailActivity.id) {
-      let newEmailActivity = {
-        ...emailActivity,
+  function handleFormSubmit(suggestionActivity: SuggestionActivityFormValues){
+    if (!suggestionActivity.id) {
+      let newSuggestionActivity = {
+        ...suggestionActivity,
         id: uuid()
       };
-      createEmailActivity(newEmailActivity).then(() => history.push(`/emailactivities/${newEmailActivity.id}`))
+      createSuggestionActivity(newSuggestionActivity).then(() => history.push(`/suggestionactivities/${newSuggestionActivity.id}`))
     }
     
   }
@@ -67,30 +71,31 @@ export default observer( function EmailActivityForm(){
           <Formik
             validationSchema={validationSchema}
             enableReinitialize
-            initialValues={emailActivity}
+            initialValues={suggestionActivity}
             onSubmit={values => handleFormSubmit(values)}>
             {({ handleSubmit, isValid, isSubmitting, dirty }) => (
 
 
               <Form className='className="mb-3' onSubmit={handleSubmit} autoComplete='off'>
-                <MyTextInput name='username' placeholder='Username' />
-                <MyTextInput placeholder='email' name='Email' />
-
+                <MyTextInput name='title' placeholder='Title' />
+                <MyTextArea rows={3} placeholder='Description' name='description' />
+                <SuggestionMySelectInput placeholder='Category' name='category' />
                 <MyTextArea rows={3} placeholder='message' name='Message' />
              
-                <MyDateInput
+                <SuggestionMyDateInput
                   placeholderText='Date'
                   name='date'
                   showTimeSelect
                   timeCaption='time'
                   dateFormat='MMMM d, yyyy h:mm aa' />
                 <Typography sx={{ color: 'teal' }}>Location Details</Typography>
-                <MyTextInput placeholder='adress' name='Adress' />
-              
+               
+                <MyTextInput placeholder='City' name='city' />
+                <MyTextInput placeholder='Venue' name='venue' />
                 <Button
                   disabled={isSubmitting || !dirty || !isValid}
                   sx={{ float: 'right', margin: 1 }} type='submit' variant="contained" color="success">Submit</Button>
-                <Button sx={{ float: 'right', margin: 1, color: 'grey' }} component={Link} to='/emailactivities' variant="contained" type='button'>Cancel</Button>
+                <Button sx={{ float: 'right', margin: 1, color: 'grey' }} component={Link} to='/suggestionactivities' variant="contained" type='button'>Cancel</Button>
 
               </Form>
 

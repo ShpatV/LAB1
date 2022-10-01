@@ -23,6 +23,9 @@ import BannerHome from '../../features/home/BannerHome';
 import EmailActivityDashboard from '../../features/emailactivities/dashboard/EmailActivityDashboard';
 import axios from 'axios';
 import EmailActivityForm from '../../features/emailactivities/formEmail/EmailActivityForm';
+import SuggestionActivityDashboard from '../../features/suggestionactivities/dashboard/SuggestionActivityDashboard';
+import SuggestionActivityDetails from '../../features/suggestionactivities/details/SuggestionActivityDetails';
+import SuggestionActivityForm from '../../features/suggestionactivities/formSuggestion/SuggestionActivityForm';
 
 
 
@@ -64,12 +67,15 @@ function App() {
               
                 <Route exact path='/activities' component={ActivityDashboard} />
                 <Route  path='/emailactivities' component={EmailActivityDashboard} />
+                <Route  path='/suggestionactivities' component={SuggestionActivityDashboard} />
                   <Route path='/activities/:id' component={ActivityDetails} />
+                  <Route path='/suggestionactivities/:id' component={SuggestionActivityDetails} />
                   {/* <BookDashboard books={books}/>
                */}
 
                   <Route key={location.key} path={['/createActivity', '/manage/:id']} component={ActivityForm} />
                   <Route key={location.key} path={['/createEmailActivity']} component={EmailActivityForm} />
+                  <Route key={location.key} path={['/createSuggestionActivity', '/managesuggestion/:id']} component={SuggestionActivityForm} />
                   <Route path= '/profiles/:username' component={ProfilePage} />
                   <Route path= '/errors' component={TestErrors} />
                   <Route path= '/server-error' component={ServerError} />
