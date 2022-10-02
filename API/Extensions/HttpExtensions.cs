@@ -19,7 +19,7 @@ namespace API.Extensions
                 totalPages
             };
             response.Headers.Add("Pagination", JsonSerializer.Serialize(PaginationHeader));//browser read
-            response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
+            // response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
         
     }

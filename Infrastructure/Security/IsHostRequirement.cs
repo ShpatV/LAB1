@@ -38,7 +38,7 @@ namespace Infrastructure.Security
             var attendee = _dbcontext.ActivityAttendees
                 .AsNoTracking()
                 .SingleOrDefaultAsync(x => x.AppUserId == userId && x.ActivityId == activityId)
-                .Result;//activity attendee object
+                .Result; //activity attendee object
 
             if(attendee == null) return Task.CompletedTask;    
 
