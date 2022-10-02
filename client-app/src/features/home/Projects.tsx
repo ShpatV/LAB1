@@ -12,33 +12,33 @@ export default observer (function Projects()  {
 
   const projects = [
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Startup Books",
+      description: "Fairs",
       imgUrl: projImg1,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Startup Books ",
+      description: "Dream Readers",
       imgUrl: projImg2,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Startup Books",
+      description: "Fantasy Readers",
       imgUrl: projImg3,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Startup Books",
+      description: "Magic Readers ",
       imgUrl: projImg1,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Startup Books",
+      description: "Tragic Readers",
       imgUrl: projImg2,
     },
     {
-      title: "Business Startup",
-      description: "Design & Development",
+      title: "Startup Books",
+      description: "Comedy Readers",
       imgUrl: projImg3,
     },
   ];

@@ -17,7 +17,7 @@ export default observer( function LoginForm(){
     const {userStore} = useStore();
     return (
 
-        <Container className="mt-5" style={{height:500}}>
+        <Container className="mt-5" style={{height:500, marginTop:20}}>
         <Row>
             <Col lg={4} md={2} sm={2} className="text-center mt-5 p-3">
                 <img className="icon-img" src={loginIcon} alt="icon"/>
@@ -39,7 +39,8 @@ export default observer( function LoginForm(){
                     <Button color="indigo" radius="xl" size="lg" loading={isSubmitting} type="submit">Login</Button>
 
                     <div className="text-left mt-3">
-                        <a href="#"><small className="reset">Password Reset</small></a> 
+                        <a href="#"><small className="reset">Password Reset</small></a><br></br>
+                        <a href="/register"><small className="reset" style={{color:'blue'}}>If u dont have account,please Sign Up</small></a> 
                         {/* <a href="#"><small className="reset ml-2">Quick Recover</small></a> */}
                     </div>
                 </Form>

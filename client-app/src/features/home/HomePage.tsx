@@ -54,8 +54,8 @@ export default observer( function HomePage(){
 
 
                
-                 <Button onClick={() => modalStore.openModal(<LoginForm />)}>Login!</Button>
-                <Button onClick={() => modalStore.openModal(<RegisterForm />)}>Register!</Button>
+                <LoginForm />
+             
 
                 
                 </>

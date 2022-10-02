@@ -26,6 +26,7 @@ import EmailActivityForm from '../../features/emailactivities/formEmail/EmailAct
 import SuggestionActivityDashboard from '../../features/suggestionactivities/dashboard/SuggestionActivityDashboard';
 import SuggestionActivityDetails from '../../features/suggestionactivities/details/SuggestionActivityDetails';
 import SuggestionActivityForm from '../../features/suggestionactivities/formSuggestion/SuggestionActivityForm';
+import RegisterForm from '../../features/users/RegisterForm';
 
 
 
@@ -80,6 +81,7 @@ function App() {
                   <Route path= '/errors' component={TestErrors} />
                   <Route path= '/server-error' component={ServerError} />
                   <Route path= '/login' component={LoginForm} />
+                  <Route path= '/register' component={RegisterForm} />
                   <Route component={NotFound} />
              </Switch>   
              </Container>

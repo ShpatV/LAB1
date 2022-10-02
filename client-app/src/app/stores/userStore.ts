@@ -23,7 +23,7 @@ export default class UserStore {
         store.commonStore.setToken(user.token);
         this.startRefreshTokenTimer(user);
         runInAction(()=> this.user=user);
-        history.push('/activities');
+        history.push('/');
         store.modalStore.closeModal();
     }catch(error) {
         throw error;
@@ -33,7 +33,7 @@ export default class UserStore {
     store.commonStore.setToken(null);
     window.localStorage.removeItem('jwt');
     this.user = null;
-    history.push('/');
+    history.push('/login');
    }
 
    getUser= async () => {

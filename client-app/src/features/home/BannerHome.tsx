@@ -60,12 +60,12 @@ return (
             <TrackVisibility>
               {({ isVisible }) =>
               <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <span className="tagline">Welcome to Reactivities</span>
+                <span className="tagline">Welcome to Labyrinth Books </span>
                 <h1>{`Welcome to Anodyne`} <span className="txt-rotate"  data-rotate='[ "Library", "Events", "Dates" ]'><span className="wrap">{text}</span></span></h1>
                   <p style={{color:'pink',fontFamily:'Tuesday night',fontSize:40}}> "The best is when you find a book you can't put down."</p>
-                  <button  onClick={() => console.log('connect')}><a href="/activities" style={{color:'white'}}>Let’s Connect</a> <ArrowRightCircle size={25} /></button>
-                  <button  onClick={() => console.log('connect')}><a href="/emailactivities" style={{color:'white'}}>Contact Us</a> <ArrowRightCircle size={25} /></button>
-                  <button  onClick={() => console.log('connect')}><a href="/suggestionactivities" style={{color:'white'}}>Suggestions</a> <ArrowRightCircle size={25} /></button>
+                  <button  onClick={() => console.log('connect')}><a href="/activities" style={{color:'#0D324d'}}>Books Fairs</a> <ArrowRightCircle size={25} /></button>
+                  <button  onClick={() => console.log('connect')}><a href="/emailactivities" style={{color:'#0D324d'}}>Contact Us</a> <ArrowRightCircle size={25} /></button>
+                  <button  onClick={() => console.log('connect')}><a href="/suggestionactivities" style={{color:'#0D324d'}}>Suggestions</a> <ArrowRightCircle size={25} /></button>
               </div>}
             </TrackVisibility>
           </Col>
