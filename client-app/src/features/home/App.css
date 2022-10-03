@@ -76,6 +76,17 @@ input:focus, textarea:focus, select:focus {
 		padding: 0 150px;
 	}
 }
+.react-calendar {
+  width: 79% !important;;
+  border: none !important;
+  border-radius: 20;
+  box-shadow: 0 1px 2px 0 rgba(34,  36, 38, .15) !important;
+  margin-left: 80px;
+}
+
+.react-datepicker-wrapper {
+  width:100%;
+}
 
 p.success {
 	color: green;

@@ -60,7 +60,7 @@ export default observer (function EmailActivityList({emailActivity}:Props) {
     
     return(
         <>
-        <Typography sx={{fontSize:30,fontColor:'teal',fontFamily:'Moon'   }}>Your Messages</Typography>
+        <Typography sx={{fontSize:30,fontColor:'teal',fontFamily:'Moon' ,color:'white'  }}>Your Messages</Typography>
         <TableContainer component={Paper}>
         
       <Table sx={{ minWidth: 700 }} aria-label="customized table">

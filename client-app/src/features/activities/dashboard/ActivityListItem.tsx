@@ -8,6 +8,52 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import {ThemeProvider} from '@mui/system';
 import ActivityListItemAttendee from './ActivityListItemAttendee';
+import { styled } from '@mui/material/styles';
+import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
+import MuiAccordion, { AccordionProps } from '@mui/material/Accordion';
+import MuiAccordionSummary, {
+  AccordionSummaryProps,
+} from '@mui/material/AccordionSummary';
+import MuiAccordionDetails from '@mui/material/AccordionDetails';
+import { Notification } from '@mantine/core';
+
+const Accordion = styled((props: AccordionProps) => (
+  <MuiAccordion disableGutters elevation={0} square {...props} />
+))(({ theme }) => ({
+  border: `1px solid ${theme.palette.divider}`,
+  '&:not(:last-child)': {
+    borderBottom: 0,
+  },
+  '&:before': {
+    display: 'none',
+  },
+}));
+
+const AccordionSummary = styled((props: AccordionSummaryProps) => (
+  <MuiAccordionSummary
+    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: '0.9rem' }} />}
+    {...props}
+  />
+))(({ theme }) => ({
+  backgroundColor:
+    theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, .05)'
+      : 'rgba(0, 0, 0, .03)',
+  flexDirection: 'row-reverse',
+  '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
+    transform: 'rotate(90deg)',
+  },
+  '& .MuiAccordionSummary-content': {
+    marginLeft: theme.spacing(1),
+  },
+}));
+
+const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(0, 0, 0, .125)',
+}));
+
+
 interface Props {
     activity: Activity
 }
@@ -15,7 +61,8 @@ interface Props {
 const theme = createTheme({
     palette: {
       background: {
-        paper: '#708090',
+        paper: '#527996',
+        // paper: 'linear-gradient(to right bottom, #E5ECEE, #527996)'
       },
       text: {
      
@@ -54,11 +101,19 @@ const theme = createTheme({
  
    
 export default function ActivityListItem({activity}:Props){
+  const [expanded, setExpanded] = React.useState<string | false>('panel1');
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+      setExpanded(newExpanded ? panel : false);
+    };
     return ( 
         <ThemeProvider theme={theme}>
-         <Card sx={{fontSize: 16,fontFamily: 'Century Gothic'}} >
+         <Card sx={{fontSize: 16,fontFamily: 'Century Gothic',background: 'linear-gradient(to right bottom, #E5ECEE, #527996)'}} >
          {activity.isCancelled && 
-          <Typography alignItems={'center'} sx={{display:'flex',justifyContent:'center',color:'white',textAlign:'center',backgroundColor:'red'}}>Cancelled</Typography>
+            <Notification color="red"  disallowClose title={<Typography sx={{fontFamily:"Century gothic",fontSize:15,fontWeight:'bold',color:'red'}}>CANCELLED</Typography>}>
+              
+            </Notification>
             }
             
           
@@ -66,19 +121,19 @@ export default function ActivityListItem({activity}:Props){
             <CardHeader  sx={{display:'flex',alignItems:'flex-start'}}
              avatar={
                 <Avatar src={activity.host?.image || '/assets/user.png'} sx={{ width: 76, height: 76 ,marginBottom:3}} aria-label="recipe">
-                  U
+                  
                 </Avatar>
               }
               title=  {
-              <Typography component={Link} to={`/activities/${activity.id}`} sx={{fontSize:25,fontWeight:'bold'}} color="white" fontFamily={'Century Gothic '}>
+              <Typography component={Link} to={`/activities/${activity.id}`} sx={{fontSize:25,fontWeight:'bold'}} color="#527996" fontFamily={'Century Gothic '}>
                 {activity.title}
 
               </Typography>}
               subheader=  {
               
   
-                <Typography component="div" sx={{color:'whitesmoke'}}>
-                Host By <Link to={`profiles/${activity.hostUsername}`}> {activity.host?.displayName}</Link>
+                <Typography component="div" sx={{color:'#527996',textDecoration:'none'}}>
+                Host By <Link  to={`profiles/${activity.hostUsername}`}>  <Typography sx={{color:'#527996',textDecoration:'none',fontWeight:'bold',fontFamily:'Lemon Milk'}}>{activity.host?.displayName}</Typography></Link>
               </Typography>
               }
               
@@ -87,37 +142,63 @@ export default function ActivityListItem({activity}:Props){
             </CardHeader>
              {/* </Grid> */}
             {activity.isHost && (
-                 <Alert icon={false} severity="success" sx={{width:'50%',color:'orange'}}>You are hosting this activity</Alert>
+                <Notification color="red" disallowClose title="  You Are Hosting This Fair">
+              
+              </Notification>
+              
+                //  <Alert icon={false} severity="success" sx={{width:'50%',color:'orange'}}>You are hosting this activity</Alert>
               )}
                 {activity.isGoing && !activity.isHost && (
-                <Alert icon={false} severity="success" sx={{color:'green',wdith:'50%'}}>You are going this activity</Alert>
+                   <Notification color="green" disallowClose title="  You Are Going To This Fair"></Notification>
+               
               )}
          
-            <Card sx={{width:624, height:50,backgroundColor:'#fafafa'}} >
-                <Box sx={{marginTop:1.3,marginLeft:2.5}}>
-                    <AccessTimeIcon />  <Typography fontSize={15} fontFamily={'Century Gothic'} >{format(activity.date!, 'dd MMM yyyy h:mm aa')}</Typography>
-
-                    <Typography fontSize={15} fontFamily={'Century Gothic'} style={{float:'right',marginRight:50}}  >
-                    <PushPinIcon />{activity.venue}</Typography></Box>
+            
+                    <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography sx={{color:'white',fontFamily:'Century Gothic'}}>Time And Location</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography sx={{color:'white',fontFamily:'Century Gothic'}}> <AccessTimeIcon sx={{marginRight:1}} />
+          {format(activity.date!, 'dd MMM yyyy h:mm aa')}
+          </Typography>
+        </AccordionDetails>
+        <AccordionDetails>
+          <Typography sx={{color:'white',fontFamily:'Century Gothic'}}><PushPinIcon sx={{marginRight:1}} />
+          {activity.venue}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>  
                
-            </Card>
+        
 
 
             <Card sx={{
               width:624,
-              height:70,
-                backgroundColor:'#E5E4E2',
+              height:90,
+              background: 'linear-gradient(to right bottom, #E5ECEE, white)'
                
                 }} >
             
             <Box> <ActivityListItemAttendee attendees={activity.attendees!}/></Box>
                
             </Card>
+            <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+          <Typography sx={{color:'white',fontFamily:'Century Gothic'}}>Description</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography sx={{color:'white',fontFamily:'Century Gothic'}}> 
+          {activity.description}
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
             <Card sx={{
                 width:624,
                 height:50,
                 backgroundColor:'#fafafa'}}>
-                <Box style={{marginTop:11}}><Typography  fontFamily={'Century Gothic'} fontSize={15} sx={{marginLeft:2,marginTop:13}}>{activity.description}</Typography>
+                <Box style={{marginTop:11}}>
                 
             
 
@@ -134,9 +215,20 @@ export default function ActivityListItem({activity}:Props){
               
             </Card>
         </Card>
+      
         </ThemeProvider>
         
 
       
     )
 }
+
+
+
+{/* <Typography  fontFamily={'Century Gothic'} fontSize={15} sx={{marginLeft:2,marginTop:13}}>{activity.description}</Typography> */}
+
+
+{/* <Typography fontSize={15} fontFamily={'Century Gothic'} >{format(activity.date!, 'dd MMM yyyy h:mm aa')}</Typography>
+
+                    <Typography fontSize={15} fontFamily={'Century Gothic'} style={{float:'right',marginRight:50}}  >
+                    <PushPinIcon />{activity.venue}</Typography></Box> */}

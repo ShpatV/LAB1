@@ -19,6 +19,7 @@ namespace Domain
 
         public string Venue { get; set; }
 
+        public AppUser userId { get; set; }
 
     }
 }

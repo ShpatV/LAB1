@@ -51,7 +51,7 @@ export default observer (function ProfileContent({profile} : Props) {
 
   return (
     <Box
-      sx={{ marginTop:7,borderRadius:2,flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 300,weight:700 }}
+      sx={{ marginTop:7,borderRadius:2,flexGrow: 1, bgcolor: 'background.paper', display: 'flex', height: 400,weight:700 }}
     >
       <Tabs
         orientation="vertical"

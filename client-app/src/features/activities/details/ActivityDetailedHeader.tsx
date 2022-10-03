@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import {format} from 'date-fns';
 import { useStore } from '../../../app/stores/store';
 import { Button } from '@mantine/core';
+import { Notification } from '@mantine/core';
 const activityImageStyle ={
    
 
@@ -60,14 +61,16 @@ export default observer (function ActivityDetailedHeader({activity}: Props) {
     return (
         <Box>
             {activity.isCancelled && 
-                <Box sx={{position:'absolute',right:20,justifyContent:'right',float:'right',borderRadius:2,width:100,height:20,padding:0.1 ,backgroundColor: 'orange',color:'white'}}>
-                <Typography  sx={{display:'flex',justifyContent:'center'}}>Cancelled</Typography></Box>
+             <Notification color="red" disallowClose title="Cancelled">
+              
+             </Notification>
+                
             }
             <Paper style={styles.paperContainer} sx={{filter: 'brightness(100%)' ,maxWidth:945,height:400}}>
 
                 <Typography sx={{textAlign:'left',position:'absolute',marginTop:20,marginLeft:5,fontFamily:'Century Gothic',fontSize:60,color:'white'}}>{activity.title}
                 <Typography>{format (activity.date!,'dd MMM yyyy')}</Typography>
-                <Typography>Hosted by <Link to={`/profiles/${activity.host?.username}`}>{activity.host?.displayName}</Link> </Typography>
+                <Typography>Hosted by <Link to={`/profiles/${activity.host?.username}`}><Typography sx={{textDecoration:'none',color:'white'}}>{activity.host?.displayName}</Typography></Link> </Typography>
                 </Typography>
             </Paper>
             <Paper sx={{height:70}}>
@@ -76,7 +79,7 @@ export default observer (function ActivityDetailedHeader({activity}: Props) {
                 
            
                     <Button sx={{alignItems:'flex-start',margin:18}} loading={loading }variant="light" color={activity.isCancelled ? 'green' : 'red'} radius="md" onClick={cancelActivityToggle}  >{activity.isCancelled ? 'Re-activate Activity' : 'Cancel Activity'}</Button>
-                    <Button color="red" radius="md" disabled={activity.isCancelled} component={Link} to={`/manage/${activity.id}`}   sx={{float:'right',marginTop:2,marginRight:4.5}}>
+                    <Button color="blue" radius="md" disabled={activity.isCancelled} component={Link} to={`/manage/${activity.id}`}   sx={{float:'right',marginTop:20,marginRight:10}}>
                        Manage Event
                    </Button>
                     </>
@@ -86,7 +89,7 @@ export default observer (function ActivityDetailedHeader({activity}: Props) {
                     <Button loading={loading} variant="light" color="teal" radius="md" onClick={updateAttendance}   sx={{marginTop:2,marginLeft:1.5}}>Cancel attendance</Button>
 
                 ) : (
-                    <Button loading={loading} variant="light" color="teal" radius="md" disabled={activity.isCancelled} onClick={updateAttendance}   sx={{marginTop:2,marginLeft:4.5}}>Join Activity</Button>
+                    <Button loading={loading} variant="light" color="teal" radius="md" disabled={activity.isCancelled} onClick={updateAttendance}   sx={{marginTop:20,marginLeft:12}}>Join Activity</Button>
 
                 )}
    
@@ -99,3 +102,6 @@ export default observer (function ActivityDetailedHeader({activity}: Props) {
         </Box>
     )
 })
+
+{/* <Box sx={{position:'absolute',right:20,justifyContent:'right',float:'right',borderRadius:2,width:100,height:20,padding:0.1 ,backgroundColor: 'orange',color:'white'}}>
+                <Typography  sx={{display:'flex',justifyContent:'center'}}>Cancelled</Typography></Box> */}

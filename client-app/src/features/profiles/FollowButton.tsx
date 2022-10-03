@@ -27,7 +27,7 @@ export default observer(function FollowButton({profile}: Props){
             
         </Grid><Grid item xs={6} md>
 
-                <div><Item><Button  sx={{ width: 240 }} color={profile.following ? 'red' : 'green'} loading={loading} onClick={(e: React.SyntheticEvent<Element, Event>) => handleFollow(e, profile.username )} >{profile.following ? 'Unfollow' : 'Follow'} </Button>
+                <div><Item><Button  sx={{ width: '100%'}} color={profile.following ? 'red' : 'green'} loading={loading} onClick={(e: React.SyntheticEvent<Element, Event>) => handleFollow(e, profile.username )} >{profile.following ? 'Unfollow' : 'Follow'} </Button>
                 </Item></div>
             </Grid></>
     )

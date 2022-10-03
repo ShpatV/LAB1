@@ -25,7 +25,8 @@ namespace Application.EmailActivities
             public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var emailactivity = await _context.EmailActivities.FindAsync(request.Id);
-
+                Console.WriteLine("EMAIL ID: " + request.Id);
+                Console.WriteLine("EMAIL: " + emailactivity.Title);
                 _context.Remove(emailactivity);
 
                  var result=await _context.SaveChangesAsync() > 0;

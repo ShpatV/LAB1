@@ -19,9 +19,11 @@ export default observer(function ProfileFollowings(){
                 </Grid>
                 <Grid sx={{flexDirection:'column'}}>
                 <Grid item xs={12}>
+                    <Box sx={{width:200,height:350}}>
                         {followings.map(profile => (
                             <ProfileCard  key={profile.username} profile={profile} />
                         ))}
+                        </Box>
                     
                 </Grid>
                 

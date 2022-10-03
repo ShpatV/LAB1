@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import ActivityListItem from './ActivityListItem';
 import { AppBar, makeStyles, Typography } from '@mui/material';
 import {Grid} from '@mui/material';
-
+import Location from '../../../assets/img/location.svg'
 
 
 export default observer (function ActivityList() {
@@ -15,26 +15,31 @@ export default observer (function ActivityList() {
     
     return(
         <>
-        <Grid container spacing={{xs:4,md:7}}  >
+        
+        <Typography sx={{fontSize:35,color:'white',fontFamily:'moon',fontWeight:'bold',marginRight:20,alignItems:'left',justifyContent:'left'}}><img src={Location} style={{width:150,height:150,marginRight:10,alignItems:'Left',justifyContent:'left'}} />Book Fairs</Typography>
+        <Grid container spacing={{xs:2,md:7}}  >
             {groupedActivities.map(([group, activities]) => (
                 
-                <Fragment key={group}>
-                    <AppBar position="static" color='transparent'style={{marginTop:200}} > 
-                    <Typography color='#192841'>
+               
+                    
+                    <Typography color='white' sx={{fontFamily:'Century gothic',fontWeight:'bold',marginTop:20}}>
+                    <Fragment key={group}>
                         {group}
+                        <AppBar position="static" color='transparent'style={{marginTop:20,borderRadius:20}} > 
                        
-                            <Card sx={{ display: 'flex-column' } }  >
+                            <Card sx={{ display: 'flex-column' ,borderRadius:3,background: 'linear-gradient(to right bottom, #E5ECEE, #527996)'} }  >
                             {activities.map(activity=> (
                             <ActivityListItem key={activity.id} activity = {activity}/>
                             ))}
                             </Card>
               
                         
-                        </Typography>
+                 
 
                     </AppBar>
 
                 </Fragment>
+                </Typography>
               
             ))}
               </Grid>

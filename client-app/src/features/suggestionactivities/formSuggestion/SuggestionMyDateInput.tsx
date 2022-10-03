@@ -12,9 +12,9 @@ export default function SuggestionMyDateInput(props: Partial<ReactDatePickerProp
     const [field, meta,helpers] = useField(props.name!);
     return (
         
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Group className="mb-3" controlId="formBasicEmail" style={{width:200}}>
                 
-              <DatePicker
+              <DatePicker 
                 {...field}
                 {...props}
                 selected={(field.value && new Date(field.value)) || null}

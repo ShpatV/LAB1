@@ -65,7 +65,7 @@ export default observer( function SuggestionActivityForm(){
     
       <><Box sx={{ padding: 1.4, weight:200,height: 600, maxWidth: '100%',float:'right'}}>
         <Typography sx={{ color: 'teal' }}><img src={createImg} style={{ width: 400, height: 500 }} /></Typography>
-      </Box><Paper sx={{ padding: 1.4, height: 600,width:700 }}>
+      </Box><Paper sx={{ padding: 1.4, height: 800,width:700 }}>
 
 
           <Formik

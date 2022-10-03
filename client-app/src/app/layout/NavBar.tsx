@@ -227,7 +227,7 @@ export default observer ( function NavBar()  {
                 <a href="#"><img src={navIcon2} alt="" /></a>
                 <a href="#"><img src={navIcon3} alt="" /></a>
               </div>
-              <Nav.Link href='/activities'>
+              <Nav.Link href='/createActivity'>
                 <button className="vvd"><span>Create Activity</span></button>
               </Nav.Link>
               
@@ -241,7 +241,7 @@ export default observer ( function NavBar()  {
                       aria-haspopup="true"
                       aria-expanded={open ? 'true' : undefined}
                     >
-                      <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                      <Avatar sx={{ width: 32, height: 32 }}></Avatar>
                     </IconButton>
                   </Tooltip>
               
@@ -281,10 +281,11 @@ export default observer ( function NavBar()  {
                   anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
                 >
                   <MenuItem>
-                    <Avatar sx={{width:62,height:62}} component={Link} to={`/profiles/${user?.username}`} /> {user?.displayName}
+                    <Avatar sx={{width:62,height:62}}  /> 
+                    
                   </MenuItem>
                   <MenuItem>
-                    <Avatar /> My account
+                    <Avatar /> <Typography component={Link} to={`/profiles/${user?.username}`}>{user?.displayName}</Typography>
                   </MenuItem>
                   <Divider />
                 

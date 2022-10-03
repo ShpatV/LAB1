@@ -1,5 +1,5 @@
 
-import { Button, Loader } from '@mantine/core';
+import { Button, Loader, Textarea } from '@mantine/core';
 import { Box, Typography , ListItem, ListItemAvatar, Divider, List,ListItemText, TextareaAutosize,Avatar} from '@mui/material';
 import { Formik, Form, Field, FieldProps } from 'formik';
 import { observer } from 'mobx-react-lite'
@@ -41,48 +41,14 @@ export default observer(function ActivityDetailedChat({activityId}: Props) {
             width: 863,
             borderRadius:2,
             height: 60,
-            backgroundColor: 'primary.dark',
+            background: 'linear-gradient(to right bottom, #E5ECEE, #527996)',
             marginTop:2
-        }}><Typography variant="h1" align="center" sx={{fontFamily:'Century Gothic',fontSize:20,padding:2,color:'white'}}>Chat About This Event!</Typography></Box>
+        }}><Typography variant="h1" align="center" sx={{fontFamily:'Century Gothic',fontSize:20,padding:2,color:'white'}}>Chat About This Fair!</Typography></Box>
         <Box sx={{width: 863,
             borderRadius:2,
  
             backgroundColor: 'white'}}>
-          <Formik onSubmit={(values, { resetForm}) => 
-            commentStore.addComment(values).then(() => resetForm())}
-                        initialValues={{body: ''}}
-                        validationSchema={Yup.object({
-                            body: Yup.string().required()
-                        })}    
-                    >
-                        {({ isSubmitting, isValid, handleSubmit}) => (
-                        <Form className='mb-3 '>
-           
-                            <Field name ='body'>
-                                {(props: FieldProps) => (
-                                    <div style={{position: 'relative'}}>
-                                      
-                                        <textarea
-                                        style={{width:800,height:200}}
-                                            placeholder='Enter yout comment'
-                                            rows={2}
-                                            {...props.field}
-                                            onKeyPress={e => {
-                                                if(e.key === 'Enter' && e.shiftKey) {
-                                                    return;
-                                                }
-                                                if(e.key === 'Enter' && !e.shiftKey){
-                                                    e.preventDefault();
-                                                    isValid && handleSubmit();
-                                                }
-                                            }}
-                                        />
-                                    </div>
-                                )}
-                            </Field>
-                            </Form>
-                        )}
-                    </Formik>       
+         
                
       
         
@@ -156,7 +122,41 @@ export default observer(function ActivityDetailedChat({activityId}: Props) {
                     ))}
        
                  
-                    </List>   </Box>
+                    </List> <Formik onSubmit={(values, { resetForm}) => 
+            commentStore.addComment(values).then(() => resetForm())}
+                        initialValues={{body: ''}}
+                        validationSchema={Yup.object({
+                            body: Yup.string().required()
+                        })}    
+                    >
+                        {({ isSubmitting, isValid, handleSubmit}) => (
+                        <Form className='mb-3 ' >
+           
+                            <Field name ='body' style={{marginTop:10}}>
+                                {(props: FieldProps) => (
+                                    <div style={{position: 'relative'}}>
+                                      
+                                        <Textarea
+                                        style={{width:860,height:200}}
+                                            placeholder='Enter yout comment'
+                                            rows={2}
+                                            {...props.field}
+                                            onKeyPress={e => {
+                                                if(e.key === 'Enter' && e.shiftKey) {
+                                                    return;
+                                                }
+                                                if(e.key === 'Enter' && !e.shiftKey){
+                                                    e.preventDefault();
+                                                    isValid && handleSubmit();
+                                                }
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            </Field>
+                            </Form>
+                        )}
+                    </Formik>          </Box>
              </>
       
                   

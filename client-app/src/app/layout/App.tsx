@@ -60,7 +60,7 @@ function App() {
        path={'/(.+)'}
        render={()=> (
          <>
-          <NavBar />
+          <NavBar  />
             <Container style={{marginTop: '7em'}}>
               <Switch>
               

@@ -17,6 +17,10 @@ import { categoryOptions } from '../../../app/common/options/categoryOptions';
 import MyDateInput from './EmailMyDateInput';
 import { EmailActivityFormValues } from '../../../app/models/emailactivity';
 import createImg from '../../../assets/img/create.svg';
+import EmailMyDateInput from './EmailMyDateInput';
+import EmailMyTextArea from './EmailMyTextArea';
+
+
 
 export default observer( function EmailActivityForm(){
   const history = useHistory();
@@ -27,10 +31,11 @@ export default observer( function EmailActivityForm(){
   const [emailActivity,setEmailActivity] = useState<EmailActivityFormValues>(new EmailActivityFormValues());
 
   const validationSchema = Yup.object({
-    username: Yup.string().required('The activity title is required'),
-    adress: Yup.string().required('The activity description is required'),
+    title: Yup.string().required('The activity title is required'),
+    description: Yup.string().required('The activity description is required'),
+    // category: Yup.string().required(),
     date: Yup.string().required('Date is required').nullable(),
-    message: Yup.string().required(),
+    venue: Yup.string().required(),
     city: Yup.string().required(),
 
   });
@@ -39,7 +44,7 @@ export default observer( function EmailActivityForm(){
 
 
   useEffect(() =>{
-    if(id) loadEmailActivity(id).then(activity => setEmailActivity(new EmailActivityFormValues(emailActivity)))
+    if(id) loadEmailActivity(id).then(emailActivity => setEmailActivity(new EmailActivityFormValues(emailActivity)))
   }, [id, loadEmailActivity]);
 
   function handleFormSubmit(emailActivity: EmailActivityFormValues){
@@ -48,7 +53,7 @@ export default observer( function EmailActivityForm(){
         ...emailActivity,
         id: uuid()
       };
-      createEmailActivity(newEmailActivity).then(() => history.push(`/emailactivities/${newEmailActivity.id}`))
+      createEmailActivity(newEmailActivity).then(() => history.push(`/emailactivities/${emailActivity.id}`))
     }
     
   }
@@ -61,7 +66,7 @@ export default observer( function EmailActivityForm(){
     
       <><Box sx={{ padding: 1.4, weight:200,height: 600, maxWidth: '100%',float:'right'}}>
         <Typography sx={{ color: 'teal' }}><img src={createImg} style={{ width: 400, height: 500 }} /></Typography>
-      </Box><Paper sx={{ padding: 1.4, height: 600,width:700 }}>
+      </Box><Paper sx={{ padding: 1.4, height: 700,width:700 }}>
 
 
           <Formik
@@ -73,20 +78,21 @@ export default observer( function EmailActivityForm(){
 
 
               <Form className='className="mb-3' onSubmit={handleSubmit} autoComplete='off'>
-                <MyTextInput name='username' placeholder='Username' />
-                <MyTextInput placeholder='email' name='Email' />
-
-                <MyTextArea rows={3} placeholder='message' name='Message' />
+                <MyTextInput name='title' placeholder='Title' />
+                <EmailMyTextArea rows={3} placeholder='Description' name='description' />
+               
+                <EmailMyTextArea rows={3} placeholder='message' name='Message' />
              
-                <MyDateInput
+                <EmailMyDateInput
                   placeholderText='Date'
                   name='date'
                   showTimeSelect
                   timeCaption='time'
                   dateFormat='MMMM d, yyyy h:mm aa' />
                 <Typography sx={{ color: 'teal' }}>Location Details</Typography>
-                <MyTextInput placeholder='adress' name='Adress' />
-              
+               
+                <MyTextInput placeholder='City' name='city' />
+                <MyTextInput placeholder='Venue' name='venue' />
                 <Button
                   disabled={isSubmitting || !dirty || !isValid}
                   sx={{ float: 'right', margin: 1 }} type='submit' variant="contained" color="success">Submit</Button>

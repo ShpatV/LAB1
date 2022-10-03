@@ -15,9 +15,9 @@ export default observer(function ProfileAbout() {
         <Tabs>
             <Grid>
                 <Grid sx={{flexDirection:'column'}} >
-                    <Typography sx={{floated:'left'}}>{`About ${profile?.displayName}`}</Typography>
+                    <Typography sx={{floated:'left',fontFamily:'Century Gothic',fontSize:20,fontWeight:'bold'}}>{`About ${profile?.displayName}`}</Typography>
                     {isCurrentUser && (
-                        <Button
+                        <Button variant="contained" sx={{float:'right',marginLeft:75,marginBottom:2}}
                             onClick={() => setEditMode(!editMode)}
                         >{editMode ? 'Cancel' : 'Edit Profile'}</Button>
                     )}

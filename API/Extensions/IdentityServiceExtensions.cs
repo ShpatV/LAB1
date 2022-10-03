@@ -58,8 +58,13 @@ namespace API.Extensions
                 {
                     policy.Requirements.Add(new IsHostRequirement());
                 });
+                opt.AddPolicy("IsEmailReceiver", policy =>
+                {
+                    policy.Requirements.Add(new IsEmailReceiver());
+                });
             });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
+            services.AddTransient<IAuthorizationHandler, IsEmailReceiverHandler>();
             services.AddScoped<TokenService>();
             return services;
         }

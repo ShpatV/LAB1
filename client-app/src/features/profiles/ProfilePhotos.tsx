@@ -36,7 +36,7 @@ export default observer (function ProfilePhotos({profile}: Props) {
     return(
      
             <><Grid>
-            <Typography sx={{ fontFamily: 'Century Gothic', fontWeight: 'Bold', float: 'left' }}><AutoAwesomeMosaicIcon />Photos</Typography>
+           
             {isCurrentUser && (
                 <Button sx={{ display: 'fl', justifyContent: 'right', float: 'right', alignItems: 'center' }} onClick={() => setAddPhotoMode(!addPhotoMode)}>{addPhotoMode ? 'Cancel' : 'Add Photo'}</Button>
             )}
@@ -51,7 +51,7 @@ export default observer (function ProfilePhotos({profile}: Props) {
                                     <Box>
                                     <Image src={photo.url} key={photo.id} radius="sm" />
                                     {isCurrentUser && (
-                                        <ButtonGroup sx={{width: 190}}>
+                                        <ButtonGroup sx={{width: 210}}>
                                             <Button sx={{width: 200}} color={'green'}
                                             name={ 'main' + photo.id} 
                                             disabled={photo.isMain}
